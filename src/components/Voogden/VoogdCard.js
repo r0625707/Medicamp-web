@@ -4,6 +4,7 @@ import {
     CardHeader, CardFooter, Table, Button
 } from 'reactstrap';
 import axios from 'axios';
+import VoogdForm from './VoogdForm';
 
 class VoogdCard extends React.Component {
 
@@ -53,7 +54,7 @@ class VoogdCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <Button color="success">+</Button>
+                        <VoogdForm login={this.props.login}/>
                     </CardFooter>
                 </Card>
             </Col>

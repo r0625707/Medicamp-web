@@ -82,6 +82,10 @@ class KindDetail extends React.Component {
                 <Row>
                     <Col xs="12" sm="12" md="8" lg="6">
                         <h2>{this.state.kind.voornaam} {this.state.kind.naam}</h2>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs="12" sm="12" md="8" lg="6">
                         <Table responsive bordered>
                             <tr>
                                 <td>Geboortedatum</td>
@@ -100,6 +104,10 @@ class KindDetail extends React.Component {
                                 <td>{this.boolToText(this.state.kind.dafi)}</td>
                             </tr>
                         </Table>
+                    </Col>
+                    <Col xs="12" sm="12" md="4" lg="6">
+                        <h3>Opmerkingen</h3>
+                        <span>{this.state.kind.opmerking}</span>
                     </Col>
                 </Row>
             </div>
