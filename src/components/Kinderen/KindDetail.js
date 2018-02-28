@@ -2,6 +2,7 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Loading from '../Loading';
 
 class KindDetail extends React.Component {
 
@@ -56,7 +57,7 @@ class KindDetail extends React.Component {
 
         while(this.state.loadingKind && this.state.loadingUser) {
             return(
-                <div>Loading...</div>
+                <Loading />
             );
         }
 

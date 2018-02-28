@@ -6,6 +6,7 @@ import VoogdCard from '../Voogden/VoogdCard';
 import GroepCard from '../Groepen/GroepCard';
 import TakCard from '../Takken/TakCard';
 import UpdateForm from './UpdateForm';
+import Loading from '../Loading';
 
 class Profile extends React.Component {
 
@@ -68,7 +69,7 @@ class Profile extends React.Component {
 
         while(this.state.loading) {
             return(
-                <div>Loading...</div>
+                <Loading />
             );
         }
 

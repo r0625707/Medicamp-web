@@ -113,7 +113,7 @@ class KindForm extends React.Component {
     render() {
         return (
             <div>
-                <Button onClick={this.toggle} color="success" style={{ cursor: 'pointer' }}>+</Button>
+                <Button onClick={this.toggle} color="success" style={{ cursor: 'pointer' }}>Toevoegen</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Kind toevoegen</ModalHeader>
                     <ModalBody>

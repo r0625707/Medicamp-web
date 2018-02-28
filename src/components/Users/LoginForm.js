@@ -55,7 +55,7 @@ class LoginForm extends React.Component{
                         <Form>
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label for="login" className="mr-sm-2">Email</Label>
-                                <Input type="email" name="login" id="login" value={this.state.login} onChange={this.onLoginChange}/>
+                                <Input autoFocus type="email" name="login" id="login" value={this.state.login} onChange={this.onLoginChange}/>
                             </FormGroup>
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label for="password" className="mr-sm-2">Wachtwoord</Label>
