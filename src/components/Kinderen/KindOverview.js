@@ -79,7 +79,7 @@ class KindOverview extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs="12" sm="12" md="10" lg="10">
+                    <Col xs="12" sm="12" md="12" lg="12">
                         <h2>Kinderen</h2>
                         <Table striped responsive>
                             <thead>
@@ -106,7 +106,7 @@ class KindOverview extends React.Component {
                                         <td>{this.boolToText(row.dafi)}</td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        <td><Link to={'/profile/'+this.state.user.login+'/kind/'+row.idkind}><i className="fa fa-arrow-right"></i></Link></td>
                                     </tr>
                                 )
                             })}</tbody>
