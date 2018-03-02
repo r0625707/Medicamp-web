@@ -49,14 +49,14 @@ class Admin extends React.Component {
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
                         <Row>
-                            <Col xs="12" sm="12" md="8" lg="6">
+                            <Col xs="12" sm="12" md="10" lg="10">
                                 <UserList />
                             </Col>
                         </Row>
                     </TabPane>
                     <TabPane tabId="2">
                         <Row>
-                            <Col xs="12" sm="12" md="8" lg="6">
+                            <Col xs="12" sm="12" md="10" lg="10">
                                 <GroepList />
                             </Col>
                         </Row>

@@ -1,11 +1,12 @@
 import React from 'react';
 import {
     Card, CardBody, Col,
-    CardHeader, CardFooter, Table, Button
+    CardHeader, CardFooter, Table
 } from 'reactstrap';
 import KindForm from '../Kinderen/KindForm';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import KoppelVoogd from './KoppelVoogd';
 
 class KindCard extends React.Component {
 
@@ -48,7 +49,7 @@ class KindCard extends React.Component {
                                 return (
                                     <tr key={key}>
                                         <td>{row.voornaam} {row.naam}</td>
-                                        <td><Button href="#"><i className="fa fa-user-plus"></i></Button></td>
+                                        <td><KoppelVoogd idkind={row.idkind} login={this.props.login}/></td>
                                         <td><Link to={'/profile/'+this.props.login+'/kind/'+row.idkind}><i className="fa fa-arrow-right"></i></Link></td>
                                     </tr>
                                 )

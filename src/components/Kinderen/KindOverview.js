@@ -4,6 +4,9 @@ import { Breadcrumb, BreadcrumbItem, Table, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import KindForm from './KindForm';
 import Loading from '../Loading';
+import KoppelVoogd from './KoppelVoogd';
+import DeleteKind from './DeleteKind';
+import UpdateKind from './UpdateKind';
 
 class KindOverview extends React.Component {
 
@@ -104,8 +107,9 @@ class KindOverview extends React.Component {
                                         <td>{this.boolToText(row.zwemmen)}</td>
                                         <td>{this.boolToText(row.sport)}</td>
                                         <td>{this.boolToText(row.dafi)}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><KoppelVoogd idkind={row.idkind} login={this.state.user.login}/></td>
+                                        <td><UpdateKind idkind={row.idkind} /></td>
+                                        <td><DeleteKind idkind={row.idkind} naam={row.naam} voornaam={row.voornaam} id={key} /></td>
                                         <td><Link to={'/profile/'+this.state.user.login+'/kind/'+row.idkind}><i className="fa fa-arrow-right"></i></Link></td>
                                     </tr>
                                 )

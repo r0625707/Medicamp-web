@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class LoginForm extends React.Component{
 
@@ -55,7 +56,7 @@ class LoginForm extends React.Component{
                         <Form>
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label for="login" className="mr-sm-2">Email</Label>
-                                <Input autoFocus type="email" name="login" id="login" value={this.state.login} onChange={this.onLoginChange}/>
+                                <Input autoFocus="true" type="email" name="login" id="login" value={this.state.login} onChange={this.onLoginChange}/>
                             </FormGroup>
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label for="password" className="mr-sm-2">Wachtwoord</Label>

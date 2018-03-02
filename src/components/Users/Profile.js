@@ -93,7 +93,7 @@ class Profile extends React.Component {
                     <GroepCard login={this.props.match.params.login} role={this.state.data.role} />
                     <TakCard login={this.props.match.params.login} role={this.state.data.role} />
                     <KindCard login={this.props.match.params.login} role={this.state.data.role} />
-                    <VoogdCard login={this.props.match.params.login} role={this.state.data.role} />
+                    <VoogdCard id={this.props.match.params.login} login={this.props.match.params.login} role={this.state.data.role} for="user"/>
                 </Row>
             </div>
         );

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Card, CardBody, Col,
-    CardHeader, CardFooter, Table, Button
+    CardHeader, CardFooter, Table
 } from 'reactstrap';
 import axios from 'axios';
 import VoogdForm from './VoogdForm';
@@ -17,7 +17,18 @@ class VoogdCard extends React.Component {
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/voogd")
+        var link;
+        switch(this.props.for) {
+            case "kind":
+                link = "https://medicamp-so.appspot.com/api/kind/"+this.props.id+"/voogd";
+                break;
+            case "user":
+                link = "https://medicamp-so.appspot.com/api/user/"+this.props.id+"/voogd";
+                break;
+            default:
+                link="";
+        }
+        axios.get(link)
             .then((response) => {
                 this.setState({
                     data: response.data
@@ -39,7 +50,7 @@ class VoogdCard extends React.Component {
             <Col xs="12" sm="12" md="6" lg="3">
                 <Card>
                     <CardHeader>
-                        Voogden
+                        Contactpersonen
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>

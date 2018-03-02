@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Row, Col, Table } from 'reactstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
+import VoogdCard from '../Voogden/VoogdCard';
 
 class KindDetail extends React.Component {
 
@@ -109,6 +110,9 @@ class KindDetail extends React.Component {
                         <h3>Opmerkingen</h3>
                         <span>{this.state.kind.opmerking}</span>
                     </Col>
+                </Row>
+                <Row>
+                    <VoogdCard id={this.state.kind.idkind} login={this.state.user.login} for="kind" role={this.state.user.role} />
                 </Row>
             </div>
         );

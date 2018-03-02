@@ -30,7 +30,7 @@ class Header extends React.Component {
     render() {
         return (
             <header>
-                <Navbar color="faded" light>
+                <Navbar color="faded" light expand="md">
                     <NavbarBrand tag={Link} to="/">Medicamp</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} style={{cursor:'pointer'}} />
                     <Collapse isOpen={this.state.isOpen} navbar>
