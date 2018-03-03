@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import { connect } from 'react-redux';
+import AuthenticationStore from '../../stores/AuthenticationStore';
+import AuthenticationConstants from '../../constants/AuthenticatinConstants';
+import AuthenticationActions from '../../actions/AuthenticationActions';
 
 class LoginForm extends React.Component{
 
@@ -37,13 +39,7 @@ class LoginForm extends React.Component{
     }
 
     login() {
-        axios.post("https://medicamp-so.appspot.com/api/user/login", {
-            login: this.state.login,
-            password: this.state.password
-        })
-        .then(function(response) {
-            this.toggle();
-        })
+        AuthenticationActions.login(this.state.login, this.state.password);
     }
 
     render() {
@@ -65,7 +61,7 @@ class LoginForm extends React.Component{
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" href={'/profile/'+this.state.login} style={{cursor:'pointer'}}>Login</Button>
+                        <Button color="primary" onClick={this.login} style={{cursor:'pointer'}}>Login</Button>
                         <Button onClick={this.toggle} style={{cursor:'pointer'}}>Annuleren</Button>
                     </ModalFooter>
                 </Modal>

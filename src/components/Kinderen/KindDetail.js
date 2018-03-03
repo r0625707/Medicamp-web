@@ -112,7 +112,7 @@ class KindDetail extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <VoogdCard id={this.state.kind.idkind} login={this.state.user.login} for="kind" role={this.state.user.role} />
+                    <VoogdCard id={this.props.match.params.idkind} login={this.state.user.login} for="kind" role={this.state.user.role} />
                 </Row>
             </div>
         );
