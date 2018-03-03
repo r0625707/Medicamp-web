@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Tooltip } from 'reactstrap';
 import axios from 'axios';
 
 class UpdateKind extends React.Component {
@@ -15,10 +15,12 @@ class UpdateKind extends React.Component {
             zwemmen: 0,
             sport: 0,
             gebdatum: "",
-            opmerking: ""
+            opmerking: "",
+            tooltipOpen: false
         };
 
         this.toggle = this.toggle.bind(this);
+        this.tooltipToggle = this.tooltipToggle.bind(this);
         this.toggleError = this.toggleError.bind(this);
         this.updateKind = this.updateKind.bind(this);
         this.onNaamChange = this.onNaamChange.bind(this);
@@ -36,6 +38,12 @@ class UpdateKind extends React.Component {
     toggle() {
         this.setState({
             modal: !this.state.modal
+        });
+    }
+
+    tooltipToggle() {
+        this.setState({
+            tooltipOpen: !this.state.tooltipOpen
         });
     }
 
@@ -140,7 +148,10 @@ class UpdateKind extends React.Component {
     render() {
         return (
             <div>
-                <Button onClick={this.toggle} color="warning" style={{ cursor: 'pointer' }}><i className="fa fa-edit"></i></Button>
+                <Button onClick={this.toggle} color="warning" style={{ cursor: 'pointer' }} id={'update'+this.props.idkind}><i className="fa fa-edit"></i></Button>
+                <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'update'+this.props.idkind} toggle={this.tooltipToggle}>
+                    bewerken
+                </Tooltip>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>{this.state.voornaam} {this.state.naam} bewerken</ModalHeader>
                     <ModalBody>

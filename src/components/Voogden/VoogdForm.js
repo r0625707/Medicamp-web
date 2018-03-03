@@ -100,7 +100,18 @@ class VoogdForm extends React.Component {
     }
 
     postData() {
-        axios.post("https://medicamp-so.appspot.com/api/voogd/"+this.props.login+"/", {
+        var url;
+        switch(this.props.for) {
+            case "kind":
+                url="https://medicamp-so.appspot.com/api/voogd/"+this.props.login+"/kind/"+this.props.id;
+                break
+            case "user":
+                url="https://medicamp-so.appspot.com/api/voogd/"+this.props.login+"/";
+                break
+            default:
+                url="";
+        }
+        axios.post(url, {
             naam: this.state.naam,
             voornaam: this.state.voornaam,
             email: this.state.email,

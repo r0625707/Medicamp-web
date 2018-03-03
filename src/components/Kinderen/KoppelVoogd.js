@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Tooltip } from 'reactstrap';
 import axios from 'axios';
 
 
@@ -11,13 +11,15 @@ class KoppelVoogd extends React.Component {
             modal: false,
             voogden: [],
             kind: {},
-            idvoogd: ""
+            idvoogd: "",
+            tooltipOpen: false
         }
         this.loadKind = this.loadKind.bind(this);
         this.loadVoogden = this.loadVoogden.bind(this);
         this.toggle = this.toggle.bind(this);
         this.postData = this.postData.bind(this);
         this.onVoogdChange = this.onVoogdChange.bind(this);
+        this.tooltipToggle = this.tooltipToggle.bind(this);
     }
 
     loadVoogden() {
@@ -44,6 +46,12 @@ class KoppelVoogd extends React.Component {
         });
     }
 
+    tooltipToggle() {
+        this.setState({
+            tooltipOpen: !this.state.tooltipOpen
+        });
+    }
+
     onVoogdChange(event) {
         this.setState({
             idvoogd: event.target.value
@@ -65,7 +73,10 @@ class KoppelVoogd extends React.Component {
     render() {
         return (
             <div>
-                <Button onClick={this.toggle}><i className="fa fa-user-plus"></i></Button>
+                <Button onClick={this.toggle} id={'koppel'+this.props.idkind}><i className="fa fa-user-plus"></i></Button>
+                <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'koppel'+this.props.idkind} toggle={this.tooltipToggle}>
+                    contact koppelen
+                </Tooltip>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} >
                     <ModalHeader>Contact koppelen aan {this.state.kind.voornaam}</ModalHeader>
                     <ModalBody>

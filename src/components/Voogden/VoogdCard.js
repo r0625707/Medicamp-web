@@ -65,7 +65,7 @@ class VoogdCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <VoogdForm login={this.props.login}/>
+                        <VoogdForm login={this.props.login} for={this.props.for} id={this.props.id}/>
                     </CardFooter>
                 </Card>
             </Col>

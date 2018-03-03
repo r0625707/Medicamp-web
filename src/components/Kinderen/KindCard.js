@@ -7,6 +7,8 @@ import KindForm from '../Kinderen/KindForm';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import KoppelVoogd from './KoppelVoogd';
+import UpdateKind from './UpdateKind';
+import DeleteKind from './DeleteKind';
 
 class KindCard extends React.Component {
 
@@ -50,6 +52,8 @@ class KindCard extends React.Component {
                                     <tr key={key}>
                                         <td>{row.voornaam} {row.naam}</td>
                                         <td><KoppelVoogd idkind={row.idkind} login={this.props.login}/></td>
+                                        <td><UpdateKind idkind={row.idkind} /></td>
+                                        <td><DeleteKind idkind={row.idkind} voornaam={row.voornaam} naam={row.naam} id={row.idkind} /></td>
                                         <td><Link to={'/profile/'+this.props.login+'/kind/'+row.idkind}><i className="fa fa-arrow-right"></i></Link></td>
                                     </tr>
                                 )
