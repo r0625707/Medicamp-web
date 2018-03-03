@@ -31,7 +31,7 @@ class DeleteUser extends React.Component {
                 <Popover placement="top" isOpen={this.state.popoverOpen} target={'Popover' + this.props.id} toggle={this.toggle}>
                     <PopoverBody>
                         {this.props.voornaam} {this.props.naam} verwijderen? <br />
-                        <Button color="success" onClick={this.delete}>Ja</Button>
+                        <Button color="success" onClick={this.delete}>Ja</Button>{' '}
                         <Button onClick={this.toggle}>Nee</Button>
                     </PopoverBody>
                 </Popover>

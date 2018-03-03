@@ -4,7 +4,7 @@ class Loading extends React.Component {
     render() {
         return (
             <div>
-                <i class="fa fa-spinner fa-pulse"></i>
+                <i className="fa fa-spinner fa-pulse"></i>
                 Loading...
             </div>
         )

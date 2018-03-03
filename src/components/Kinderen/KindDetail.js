@@ -1,9 +1,12 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Row, Col, Table } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Row, Col, Table, ListGroup, ListGroupItem } from 'reactstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
 import VoogdCard from '../Voogden/VoogdCard';
+import KoppelVoogd from './KoppelVoogd';
+import UpdateKind from './UpdateKind';
+import DeleteKind from './DeleteKind';
 
 class KindDetail extends React.Component {
 
@@ -86,24 +89,42 @@ class KindDetail extends React.Component {
                     </Col>
                 </Row>
                 <Row>
+                    <Col xs="12" sm="12" md="12" lg="12">
+                        <ListGroup>
+                            <ListGroupItem>
+                                <KoppelVoogd idkind={this.state.kind.idkind} login={this.props.match.params.login} /> Koppel een contactpersoon aan {this.state.kind.voornaam}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                <UpdateKind idkind={this.state.kind.idkind} /> Bewerk de gegevens voor {this.state.kind.voornaam}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                <DeleteKind idkind={this.state.kind.idkind} naam={this.state.kind.naam} voornaam={this.state.kind.voornaam} id={this.state.kind.idkind} /> Verwijder de gegevens van {this.state.kind.voornaam}
+                            </ListGroupItem>
+                        </ListGroup>
+                    </Col>
+                </Row>
+                <br />
+                <Row>
                     <Col xs="12" sm="12" md="8" lg="6">
                         <Table responsive bordered>
-                            <tr>
-                                <td>Geboortedatum</td>
-                                <td>{this.state.kind.gebdatum}</td>
-                            </tr>
-                            <tr>
-                                <td>{this.state.kind.voornaam} kan zwemmen</td>
-                                <td>{this.boolToText(this.state.kind.zwemmen)}</td>
-                            </tr>
-                            <tr>
-                                <td>{this.state.kind.voornaam} kan meedoen aan sport en spel afgestemd op zijn/haar leeftijd</td>
-                                <td>{this.boolToText(this.state.kind.sport)}</td>
-                            </tr>
-                            <tr>
-                                <td>De leiding mag {this.state.kind.voornaam} vrij te verkrijgen medicatie toedienen indien nodig</td>
-                                <td>{this.boolToText(this.state.kind.dafi)}</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>Geboortedatum</td>
+                                    <td>{this.state.kind.gebdatum}</td>
+                                </tr>
+                                <tr>
+                                    <td>{this.state.kind.voornaam} kan zwemmen</td>
+                                    <td>{this.boolToText(this.state.kind.zwemmen)}</td>
+                                </tr>
+                                <tr>
+                                    <td>{this.state.kind.voornaam} kan meedoen aan sport en spel afgestemd op zijn/haar leeftijd</td>
+                                    <td>{this.boolToText(this.state.kind.sport)}</td>
+                                </tr>
+                                <tr>
+                                    <td>De leiding mag {this.state.kind.voornaam} vrij te verkrijgen medicatie toedienen indien nodig</td>
+                                    <td>{this.boolToText(this.state.kind.dafi)}</td>
+                                </tr>
+                            </tbody>
                         </Table>
                     </Col>
                     <Col xs="12" sm="12" md="4" lg="6">
