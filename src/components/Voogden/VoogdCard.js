@@ -14,6 +14,12 @@ class VoogdCard extends React.Component {
             data: []
         };
         this.loadData = this.loadData.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadData() {
@@ -28,7 +34,7 @@ class VoogdCard extends React.Component {
             default:
                 link="";
         }
-        axios.get(link)
+        axios.get(link, this.headers)
             .then((response) => {
                 this.setState({
                     data: response.data

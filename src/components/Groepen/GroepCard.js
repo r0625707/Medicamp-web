@@ -12,11 +12,18 @@ class GroepCard extends React.Component {
         this.state = {
             data: []
         };
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
+
         this.loadData = this.loadData.bind(this);
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/groep")
+        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/groep", this.headers)
             .then((response) => {
                 this.setState({
                     data: response.data
@@ -30,7 +37,7 @@ class GroepCard extends React.Component {
 
     render() {
 
-        if(this.props.role === -1 || this.props.role === 2 || this.props.role === 1) {
+        if (this.props.role === -1 || this.props.role === 2 || this.props.role === 1) {
             return null;
         }
 

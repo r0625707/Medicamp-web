@@ -16,6 +16,12 @@ class MedicatieForm extends React.Component {
         this.onNaamChange = this.onNaamChange.bind(this);
         this.onOpmerkingChange = this.onOpmerkingChange.bind(this);
         this.postData = this.postData.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     toggle() {
@@ -40,7 +46,7 @@ class MedicatieForm extends React.Component {
         axios.post("https://medicamp-so.appspot.com/api/medicatie/kind/"+this.props.idkind, {
             naam: this.state.naam,
             opmerking: this.state.opmerking
-        })
+        }, this.headers)
         .then((response) => {
             this.toggle();
         });

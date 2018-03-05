@@ -20,7 +20,7 @@ class UserList extends React.Component {
     loadData() {
         axios.get('https://medicamp-so.appspot.com/api/user', {
             headers: {
-                Authorization: AuthenticationStore.getToken()
+                Authorization: localStorage.getItem('token')
             }
         })
             .then( (response) => {
@@ -28,6 +28,10 @@ class UserList extends React.Component {
                     data: response.data
                 });
             });
+    }
+
+    componentDidMount() {
+        this.loadData();
     }
 
     render() {

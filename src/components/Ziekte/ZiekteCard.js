@@ -13,10 +13,16 @@ class ZiekteCard extends React.Component {
         this.state = {
             data: []
         };
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/kind/"+this.props.idkind+"/ziekte")
+        axios.get("https://medicamp-so.appspot.com/api/kind/"+this.props.idkind+"/ziekte", this.headers)
         .then((response) => {
             this.setState({
                 data: response.data

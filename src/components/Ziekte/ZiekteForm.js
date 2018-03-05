@@ -18,6 +18,12 @@ class ZiekteForm extends React.Component {
         this.onBehandelingChange = this.onOpmerkingChange.bind(this);
         this.onSymptomenChange = this.onSymptomenChange.bind(this);
         this.postData = this.postData.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     toggle() {
@@ -49,7 +55,7 @@ class ZiekteForm extends React.Component {
             naam: this.state.naam,
             symptomen: this.state.symptomen,
             behandeling: this.state.behandeling
-        })
+        }, this.headers)
         .then((response) => {
             this.toggle();
         });

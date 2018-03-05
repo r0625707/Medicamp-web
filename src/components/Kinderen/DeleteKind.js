@@ -13,6 +13,13 @@ class DeleteKind extends React.Component {
             popoverOpen: false,
             tooltipOpen: false
         };
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
+
     }
 
     toggle() {
@@ -28,7 +35,7 @@ class DeleteKind extends React.Component {
     }
 
     delete() {
-        axios.delete("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind+"/")
+        axios.delete("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind+"/", this.headers)
         .then(this.toggle);
     }
 

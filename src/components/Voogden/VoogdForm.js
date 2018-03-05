@@ -31,6 +31,12 @@ class VoogdForm extends React.Component {
         this.onPostcodeChange = this.onPostcodeChange.bind(this);
         this.onPlaatsChange = this.onPlaatsChange.bind(this);
         this.postData = this.postData.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     toggle() {
@@ -121,7 +127,7 @@ class VoogdForm extends React.Component {
             bus: this.state.bus,
             postcode: this.state.postcode,
             plaats: this.state.plaats
-        })
+        }, this.headers)
         .then((response) => {
             this.toggle();
         })

@@ -12,10 +12,16 @@ class DieetCard extends React.Component {
         this.state = {
             data: []
         };
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/kind/"+this.props.idkind+"/dieet")
+        axios.get("https://medicamp-so.appspot.com/api/kind/"+this.props.idkind+"/dieet", this.headers)
         .then((response) => {
             this.setState({
                 data: response.data

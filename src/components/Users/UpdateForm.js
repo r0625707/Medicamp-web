@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
+import AuthenticationStore from '../../stores/AuthenticationStore';
 
 class UpdateForm extends React.Component {
 
@@ -15,6 +16,12 @@ class UpdateForm extends React.Component {
             tel: "",
             password: "",
             passwordrep: ""
+        };
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
         };
 
         this.toggle = this.toggle.bind(this);
@@ -63,20 +70,20 @@ class UpdateForm extends React.Component {
     }
 
     updateUser() {
-        axios.put('https://medicamp-so.appspot.com/api/user/'+this.props.login+'/', {
-            login: this.state.login,
-            naam: this.state.naam,
-            role: this.state.role,
-            tel: this.state.tel,
-            voornaam: this.state.voornaam
-        })
+        axios.put('https://medicamp-so.appspot.com/api/user/' + this.props.login + '/', {
+                login: this.state.login,
+                naam: this.state.naam,
+                role: this.state.role,
+                tel: this.state.tel,
+                voornaam: this.state.voornaam
+            }, this.headers)
         .then((response) => {
-            this.toggle();
-        });
+    this.toggle();
+});
     }
 
-    loadUser() {
-        axios.get("https://medicamp-so.appspot.com/api/user/"+this.props.login+"/")
+loadUser() {
+    axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/", this.headers)
         .then((response) => {
             this.setState({
                 login: response.data.login,
@@ -86,60 +93,60 @@ class UpdateForm extends React.Component {
                 role: response.data.role
             });
         });
-    }
+}
 
-    componentDidMount() {
-        this.loadUser();
-    }
+componentDidMount() {
+    this.loadUser();
+}
 
-    render() {
-        return(
-            <div>
-                <Button onClick={this.toggle} color="warning" style={{cursor:'pointer'}}><i className="fa fa-edit"></i></Button>
-                <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>{this.state.voornaam} {this.state.naam} bewerken</ModalHeader>
-                    <ModalBody>
-                        <Form>
-                            <FormGroup tag="fieldset">
-                                <legend>Rol</legend>
-                                <FormGroup inline>
-                                    <select
-                                        value={this.state.role}
-                                        onChange={this.onRoleChange}
-                                    >
-                                        <option value="-1">Admin</option>
-                                        <option value="0">Hoofdleiding</option>
-                                        <option value="1">Ouder</option>
-                                        <option value="2">Leiding</option>
-                                    </select>
-                                </FormGroup>
+render() {
+    return (
+        <div>
+            <Button onClick={this.toggle} color="warning" style={{ cursor: 'pointer' }}><i className="fa fa-edit"></i></Button>
+            <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                <ModalHeader toggle={this.toggle}>{this.state.voornaam} {this.state.naam} bewerken</ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <FormGroup tag="fieldset">
+                            <legend>Rol</legend>
+                            <FormGroup inline>
+                                <select
+                                    value={this.state.role}
+                                    onChange={this.onRoleChange}
+                                >
+                                    <option value="-1">Admin</option>
+                                    <option value="0">Hoofdleiding</option>
+                                    <option value="1">Ouder</option>
+                                    <option value="2">Leiding</option>
+                                </select>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="naam">Naam</Label>
-                                <Input type="text" name="naam" id="naam" value={this.state.naam} onChange={this.onNaamChange}/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="voornaam">Voornaam</Label>
-                                <Input type="text" name="voornaam" id="voornaam" value={this.state.voornaam} onChange={this.onVoornaamChange}/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="tel">Tel.</Label>
-                                <Input type="tel" name="tel" id="tel" value={this.state.tel} onChange={this.onTelChange}/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="login">Email</Label>
-                                <Input type="email" name="login" id="login" disabled value={this.state.login}/>
-                            </FormGroup>
-                        </Form>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.updateUser} style={{cursor:'pointer'}}>Opslaan</Button>
-                        <Button onClick={this.toggle} style={{cursor:'pointer'}}>Annuleren</Button>
-                    </ModalFooter>
-                </Modal>                    
-            </div>
-        );
-    }
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="naam">Naam</Label>
+                            <Input type="text" name="naam" id="naam" value={this.state.naam} onChange={this.onNaamChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="voornaam">Voornaam</Label>
+                            <Input type="text" name="voornaam" id="voornaam" value={this.state.voornaam} onChange={this.onVoornaamChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="tel">Tel.</Label>
+                            <Input type="tel" name="tel" id="tel" value={this.state.tel} onChange={this.onTelChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="login">Email</Label>
+                            <Input type="email" name="login" id="login" disabled value={this.state.login} />
+                        </FormGroup>
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={this.updateUser} style={{ cursor: 'pointer' }}>Opslaan</Button>
+                    <Button onClick={this.toggle} style={{ cursor: 'pointer' }}>Annuleren</Button>
+                </ModalFooter>
+            </Modal>
+        </div>
+    );
+}
 
 }
 

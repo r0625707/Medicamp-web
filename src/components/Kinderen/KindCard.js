@@ -18,10 +18,16 @@ class KindCard extends React.Component {
             data: []
         };
         this.loadData = this.loadData.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/kind")
+        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/kind", this.headers)
             .then((response) => {
                 this.setState({
                     data: response.data

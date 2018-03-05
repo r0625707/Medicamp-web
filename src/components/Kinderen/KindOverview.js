@@ -21,10 +21,16 @@ class KindOverview extends React.Component {
         this.loadKinderen = this.loadKinderen.bind(this);
         this.loadUser = this.loadUser.bind(this);
         this.boolToText = this.boolToText.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadUser() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/")
+        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/", this.headers)
             .then((response) => {
                 this.setState({
                     user: response.data,
@@ -38,7 +44,7 @@ class KindOverview extends React.Component {
     }
 
     loadKinderen() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/kind")
+        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/kind", this.headers)
             .then((response) => {
                 this.setState({
                     kinderen: response.data,

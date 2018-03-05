@@ -70,6 +70,10 @@ AuthenticationStore.dispatchToken = AppDispatcher.register(action => {
             setRole(token.role);
             setAuthenticated(true);
             AuthenticationStore.emitChange();
+            localStorage.setItem('token', action.token);
+            localStorage.setItem('login', token.sub);
+            localStorage.setItem('role', token.role);
+            localStorage.setItem('isAuthenticated', true);
             break
 
         case AuthenticationConstants.LOGOUT:
@@ -78,6 +82,10 @@ AuthenticationStore.dispatchToken = AppDispatcher.register(action => {
             setRole(null);
             setAuthenticated(false);
             AuthenticationStore.emitChange();
+            localStorage.setItem('token', null);
+            localStorage.setItem('login', null);
+            localStorage.setItem('role', null);
+            localStorage.setItem('isAuthenticated', false);
             break
 
         default:

@@ -29,6 +29,12 @@ class KindForm extends React.Component {
         this.onSportChange = this.onSportChange.bind(this);
         this.onOpmerkingChange = this.onOpmerkingChange.bind(this);
         this.convertBooleanToByte = this.convertBooleanToByte.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     toggle() {
@@ -101,7 +107,7 @@ class KindForm extends React.Component {
             zwemmen: this.convertBooleanToByte(this.state.zwemmen),
             sport: this.convertBooleanToByte(this.state.sport),
             opmerking: this.state.opmerking
-        })
+        }, this.headers)
             .then((response) => {
                 this.toggle();
             })

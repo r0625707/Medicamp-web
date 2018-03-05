@@ -20,10 +20,16 @@ class KoppelVoogd extends React.Component {
         this.postData = this.postData.bind(this);
         this.onVoogdChange = this.onVoogdChange.bind(this);
         this.tooltipToggle = this.tooltipToggle.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadVoogden() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/voogd")
+        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/voogd", this.headers)
             .then((response) => {
                 this.setState({
                     voogden: response.data
@@ -32,7 +38,7 @@ class KoppelVoogd extends React.Component {
     }
 
     loadKind() {
-        axios.get("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind)
+        axios.get("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind), this.headers
             .then((response) => {
                 this.setState({
                     kind: response.data
@@ -59,7 +65,7 @@ class KoppelVoogd extends React.Component {
     }
 
     postData() {
-        axios.post("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind + "/voogd/" + this.state.idvoogd)
+        axios.post("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind + "/voogd/" + this.state.idvoogd, this.headers)
             .then((response) => {
                 this.toggle();
             })

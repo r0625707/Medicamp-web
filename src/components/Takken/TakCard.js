@@ -13,10 +13,16 @@ class TakCard extends React.Component {
             data: []
         };
         this.loadData = this.loadData.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/tak")
+        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/tak", this.headers)
             .then((response) => {
                 this.setState({
                     data: response.data

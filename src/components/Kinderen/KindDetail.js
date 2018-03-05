@@ -23,10 +23,16 @@ class KindDetail extends React.Component {
         };
         this.loadKind = this.loadKind.bind(this);
         this.loadUser = this.loadUser.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadUser() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/")
+        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/", this.headers)
             .then((response) => {
                 this.setState({
                     user: response.data
@@ -41,7 +47,7 @@ class KindDetail extends React.Component {
     }
 
     loadKind() {
-        axios.get("https://medicamp-so.appspot.com/api/kind/" + this.props.match.params.idkind + "/")
+        axios.get("https://medicamp-so.appspot.com/api/kind/" + this.props.match.params.idkind + "/", this.headers)
             .then((response) => {
                 this.setState({
                     kind: response.data

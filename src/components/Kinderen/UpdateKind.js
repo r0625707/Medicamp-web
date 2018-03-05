@@ -33,6 +33,12 @@ class UpdateKind extends React.Component {
         this.convertBooleanToByte = this.convertBooleanToByte.bind(this);
         this.loadKind = this.loadKind.bind(this);
         this.convertByteToBoolean = this.convertByteToBoolean.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     toggle() {
@@ -117,7 +123,7 @@ class UpdateKind extends React.Component {
             zwemmen: this.convertBooleanToByte(this.state.zwemmen),
             sport: this.convertBooleanToByte(this.state.sport),
             opmerking: this.state.opmerking
-        })
+        }, this.headers)
             .then((response) => {
                 this.toggle();
             })
@@ -127,7 +133,7 @@ class UpdateKind extends React.Component {
     }
 
     loadKind() {
-        axios.get('https://medicamp-so.appspot.com/api/kind/' + this.props.idkind)
+        axios.get('https://medicamp-so.appspot.com/api/kind/' + this.props.idkind, this.headers)
             .then((response) => {
                 this.setState({
                     naam: response.data.naam,

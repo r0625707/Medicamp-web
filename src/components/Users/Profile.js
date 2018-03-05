@@ -7,6 +7,7 @@ import GroepCard from '../Groepen/GroepCard';
 import TakCard from '../Takken/TakCard';
 import UpdateForm from './UpdateForm';
 import Loading from '../Loading';
+import AuthenticationStore from '../../stores/AuthenticationStore';
 
 class Profile extends React.Component {
 
@@ -21,44 +22,48 @@ class Profile extends React.Component {
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/")
+        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/", {
+            headers: {
+                Authorization: localStorage.getItem('token')
+            }
+        })
             .then((response) => {
-                this.setState({
-                    data: response.data
-                });
-                switch(response.data.role){
-                    case -1:
-                        this.setState({
-                            role: "administrator"
-                        });
-                        break;
-                    case 0:
-                        this.setState({
-                            role: "hoofdleiding"
-                        });
-                        break;
-                    case 1:
-                        this.setState({
-                            role: "ouder"
-                        });
-                        break;
-                    case 2:
-                        this.setState({
-                            role: "leiding"
-                        });
-                        break;
-                    default:
-                        this.setState({
-                            role: ""
-                        });
-                }
-            })
+            this.setState({
+                data: response.data
+            });
+            switch (response.data.role) {
+                case -1:
+                    this.setState({
+                        role: "administrator"
+                    });
+                    break;
+                case 0:
+                    this.setState({
+                        role: "hoofdleiding"
+                    });
+                    break;
+                case 1:
+                    this.setState({
+                        role: "ouder"
+                    });
+                    break;
+                case 2:
+                    this.setState({
+                        role: "leiding"
+                    });
+                    break;
+                default:
+                    this.setState({
+                        role: ""
+                    });
+            }
+        })
             .then((response) => {
                 this.setState({
                     loading: false
                 });
             });
-            ;
+        ;
     }
 
     componentDidMount() {
@@ -67,8 +72,8 @@ class Profile extends React.Component {
 
     render() {
 
-        while(this.state.loading) {
-            return(
+        while (this.state.loading) {
+            return (
                 <Loading />
             );
         }
@@ -93,7 +98,7 @@ class Profile extends React.Component {
                     <GroepCard login={this.props.match.params.login} role={this.state.data.role} />
                     <TakCard login={this.props.match.params.login} role={this.state.data.role} />
                     <KindCard login={this.props.match.params.login} role={this.state.data.role} />
-                    <VoogdCard id={this.props.match.params.login} login={this.props.match.params.login} role={this.state.data.role} for="user"/>
+                    <VoogdCard id={this.props.match.params.login} login={this.props.match.params.login} role={this.state.data.role} for="user" />
                 </Row>
             </div>
         );

@@ -14,10 +14,16 @@ class MedicatieCard extends React.Component {
             data: []
         };
         this.loadData = this.loadData.bind(this);
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/kind/"+this.props.idkind+"/medicatie")
+        axios.get("https://medicamp-so.appspot.com/api/kind/"+this.props.idkind+"/medicatie", this.headers)
         .then((response) => {
             this.setState({
                 data: response.data

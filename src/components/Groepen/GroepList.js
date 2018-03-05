@@ -9,6 +9,13 @@ class GroepList extends React.Component {
         this.state={
             data: []
         };
+
+        this.headers = {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        };
+
         this.loadData = this.loadData.bind(this);
     }
 
@@ -17,7 +24,7 @@ class GroepList extends React.Component {
     };
 
     loadData() {
-        axios.get('https://medicamp-so.appspot.com/api/groep')
+        axios.get('https://medicamp-so.appspot.com/api/groep', this.headers)
             .then( (response) => {
                 this.setState({
                     data: response.data
