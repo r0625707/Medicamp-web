@@ -7,13 +7,15 @@ import axios from 'axios';
 import VoogdForm from './VoogdForm';
 import UpdateVoogd from './UpdateVoogd';
 import DeleteVoogd from './DeleteVoogd';
+import { Link } from 'react-router-dom';
 
 class VoogdCard extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            route: ""
         };
         this.loadData = this.loadData.bind(this);
 
@@ -29,10 +31,16 @@ class VoogdCard extends React.Component {
         switch (this.props.for) {
             case "kind":
                 link = "https://medicamp-so.appspot.com/api/kind/" + this.props.id + "/voogd";
-                break;
+                this.setState({
+                    route: "/profile/kind/"+this.props.id+"/voogd"
+                });
+                break
             case "user":
                 link = "https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/voogd";
-                break;
+                this.setState({
+                    route: "/profile/voogd/"
+                });
+                break
             default:
                 link = "";
         }
@@ -58,14 +66,13 @@ class VoogdCard extends React.Component {
             <Col xs="12" sm="12" md="6" lg="3">
                 <Card>
                     <CardHeader>
-                        <b>Contactpersonen</b>
+                        <Link to={this.state.route}><b>Contactpersonen</b></Link>
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>
                             <tbody>{this.state.data.map((row, key) => {
                                 return (
                                     <tr key={key}>
-                                        <td></td>
                                         <td>{row.voornaam} {row.naam}</td>
                                         <td><UpdateVoogd idvoogd={row.idvoogd}
                                             naam={row.naam}

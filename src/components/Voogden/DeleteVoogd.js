@@ -56,11 +56,11 @@ class DeleteVoogd extends React.Component {
             case "user":
                 return (
                     <div>
-                        <Button color="danger" onClick={this.toggle} id={'Popovervoogd' + this.props.id} style={{ cursor: 'pointer' }}><i className="fa fa-trash"></i></Button>
-                        <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'Popovervoogd' + this.props.id} toggle={this.tooltipToggle}>
+                        <Button color="danger" onClick={this.toggle} id={'Popovervoogd' + this.props.idvoogd} style={{ cursor: 'pointer' }}><i className="fa fa-trash"></i></Button>
+                        <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'Popovervoogd' + this.props.idvoogd} toggle={this.tooltipToggle}>
                             verwijderen
                         </Tooltip>
-                        <Popover placement="top" isOpen={this.state.popoverOpen} target={'Popovervoogd' + this.props.id} toggle={this.toggle}>
+                        <Popover placement="top" isOpen={this.state.popoverOpen} target={'Popovervoogd' + this.props.idvoogd} toggle={this.toggle}>
                             <PopoverBody>
                                 {this.props.voornaam} {this.props.naam} verwijderen? <br />
                                 <Button color="success" onClick={this.delete}>Ja</Button>{' '}
@@ -73,11 +73,11 @@ class DeleteVoogd extends React.Component {
             case "kind":
                 return (
                     <div>
-                        <Button color="danger" onClick={this.toggle} id={'Popovervoogd' + this.props.id}><i className="fa fa-unlink"></i></Button>
-                        <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'Popovervoogd' + this.props.id} toggle={this.tooltipToggle}>
+                        <Button color="danger" onClick={this.toggle} id={'Popovervoogd' + this.props.idvoogd}><i className="fa fa-unlink"></i></Button>
+                        <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'Popovervoogd' + this.props.idvoogd} toggle={this.tooltipToggle}>
                             Loskoppelen
                         </Tooltip>
-                        <Popover placement="top" isOpen={this.state.popoverOpen} target={'Popovervoogd' + this.props.id} toggle={this.toggle}>
+                        <Popover placement="top" isOpen={this.state.popoverOpen} target={'Popovervoogd' + this.props.idvoogd} toggle={this.toggle}>
                             <PopoverBody>
                                 {this.props.voornaam} {this.props.naam} loskoppelen? <br />
                                 <Button color="success" onClick={this.delete}>Ja</Button>{' '}
