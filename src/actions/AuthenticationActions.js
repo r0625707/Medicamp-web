@@ -8,21 +8,18 @@ export default {
             login: id,
             password: pass
         })
-        .then((response) => {
-            AppDispatcher.dispatch({
-                user: response.data,
-                token: response.headers.Authorization
+            .then((response) => {
+                AppDispatcher.dispatch({
+                    actionType: 'LOGIN',
+                    token: response.headers.authorization
+                });
             });
-        });
     },
 
     logout: (id) => {
-        axios.post("https://medicamp-so.appspot.com/api/auth/logout/"+id)
-        .then((response) => {
-            AppDispatcher.dispatch({
-                user: null,
-                token: null
-            });
+        AppDispatcher.dispatch({
+            actionType: 'LOGOUT',
+            token: null
         });
     }
 

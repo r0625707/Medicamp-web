@@ -1,19 +1,25 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import AuthenticationConstants from '../constants/AuthenticatinConstants';
+import AuthenticationConstants from '../constants/AuthenticationConstants';
 import { EventEmitter } from 'events';
+import jwt_decode from 'jwt-decode';
 
-let _user = {};
+let _login = "";
 let _token = "";
+let _role = "";
 let _isAuthenticated = false;
 
 const CHANGE_EVENT = 'change';
 
-function setUser(user) {
-    _user = user;
+function setLogin(login) {
+    _login = login;
 }
 
 function setToken(token) {
     _token = token;
+}
+
+function setRole(role) {
+    _role = role;
 }
 
 function setAuthenticated(auth) {
@@ -34,12 +40,16 @@ class AuthenticationStoreClass extends EventEmitter {
         this.removeListener(CHANGE_EVENT, callback);
     }
 
-    getUser() {
-        return _user;
+    getLogin() {
+        return _login;
     }
 
     getToken() {
         return _token;
+    }
+
+    getRole() {
+        return _role;
     }
 
     isAuthenticated() {
@@ -54,15 +64,18 @@ AuthenticationStore.dispatchToken = AppDispatcher.register(action => {
 
     switch(action.actionType) {
         case AuthenticationConstants.LOGIN:
-            setUser(action.user);
             setToken(action.token);
+            var token = jwt_decode(_token);
+            setLogin(token.sub);
+            setRole(token.role);
             setAuthenticated(true);
             AuthenticationStore.emitChange();
             break
 
         case AuthenticationConstants.LOGOUT:
-            setUser(null);
+            setLogin(null);
             setToken(null);
+            setRole(null);
             setAuthenticated(false);
             AuthenticationStore.emitChange();
             break

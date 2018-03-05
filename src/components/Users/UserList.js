@@ -4,29 +4,30 @@ import axios from 'axios';
 import DeleteUser from './DeleteUser';
 import UpdateForm from './UpdateForm';
 import {Link} from 'react-router-dom';
+import AuthenticationStore from '../../stores/AuthenticationStore';
 
 class UserList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state={
-            data: []
+            data: [],
+            token: ""
         };
         this.loadData = this.loadData.bind(this);
     }
 
     loadData() {
-        axios.get('https://medicamp-so.appspot.com/api/user')
+        axios.get('https://medicamp-so.appspot.com/api/user', {
+            headers: {
+                Authorization: AuthenticationStore.getToken()
+            }
+        })
             .then( (response) => {
                 this.setState({
                     data: response.data
                 });
             });
-        setTimeout(this.loadData, 60000);
-    }
-
-    componentDidMount() {
-        this.loadData();
     }
 
     render() {

@@ -23,7 +23,6 @@ class GroepList extends React.Component {
                     data: response.data
                 });
             });
-        setTimeout(this.loadData, 60000);
     }
 
     componentDidMount() {

@@ -4,6 +4,7 @@ import {
     CardHeader, CardFooter, Table
 } from 'reactstrap';
 import axios from 'axios';
+import MedicatieForm from './MedicatieForm';
 
 class MedicatieCard extends React.Component {
 
@@ -12,6 +13,7 @@ class MedicatieCard extends React.Component {
         this.state = {
             data: []
         };
+        this.loadData = this.loadData.bind(this);
     }
 
     loadData() {
@@ -21,6 +23,10 @@ class MedicatieCard extends React.Component {
                 data: response.data
             });
         });
+    }
+
+    componentDidMount() {
+        this.loadData();
     }
 
     render() {
@@ -43,7 +49,7 @@ class MedicatieCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        
+                        <MedicatieForm idkind={this.props.idkind}/>
                     </CardFooter>
                 </Card>
             </Col>

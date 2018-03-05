@@ -4,4 +4,3 @@ export default keyMirror({
     LOGIN: null,
     LOGOUT: null
 });
-

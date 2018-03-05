@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, } from 'react-router-dom'
 import TestComponent from './TestComponent';
 import About from './About';
 import Contact from './Contact';
@@ -20,6 +20,7 @@ class Main extends React.Component {
                     <Route exact path='/profile/:login' component={Profile} />
                     <Route exact path='/profile/:login/kind' component={KindOverview} />
                     <Route exact path='/profile/:login/kind/:idkind' component={KindDetail} />
+                    
                 </Switch>
             </main>
         );

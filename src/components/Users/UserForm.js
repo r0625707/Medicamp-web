@@ -85,7 +85,7 @@ class UserForm extends React.Component {
     }
 
     postData() {
-        axios.post('https://medicamp-so.appspot.com/api/user', {
+        axios.post('https://medicamp-so.appspot.com/api/auth/register', {
             login: this.state.login,
             naam: this.state.naam,
             role: this.state.role,

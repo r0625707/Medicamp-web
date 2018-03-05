@@ -4,6 +4,7 @@ import {
     CardHeader, CardFooter, Table
 } from 'reactstrap';
 import axios from 'axios';
+import ZiekteForm from './ZiekteForm';
 
 class ZiekteCard extends React.Component {
 
@@ -43,7 +44,7 @@ class ZiekteCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        
+                        <ZiekteForm idkind={this.props.idkind} />
                     </CardFooter>
                 </Card>
             </Col>
