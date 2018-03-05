@@ -30,7 +30,7 @@ class KindOverview extends React.Component {
     }
 
     loadUser() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/", this.headers)
+        axios.get("https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/", this.headers)
             .then((response) => {
                 this.setState({
                     user: response.data,
@@ -44,7 +44,7 @@ class KindOverview extends React.Component {
     }
 
     loadKinderen() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/kind", this.headers)
+        axios.get("https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/kind", this.headers)
             .then((response) => {
                 this.setState({
                     kinderen: response.data,
@@ -82,7 +82,7 @@ class KindOverview extends React.Component {
                 <Row>
                     <Col xs="12" sm="12" md="12" lg="12">
                         <Breadcrumb>
-                            <BreadcrumbItem><Link to={'/profile/' + this.props.match.params.login}>{this.state.user.voornaam} {this.state.user.naam}</Link></BreadcrumbItem>
+                            <BreadcrumbItem><Link to='/profile'>{localStorage.getItem('voornaam')} {localStorage.getItem('naam')}</Link></BreadcrumbItem>
                             <BreadcrumbItem active>Kinderen</BreadcrumbItem>
                         </Breadcrumb>
                     </Col>
@@ -93,6 +93,7 @@ class KindOverview extends React.Component {
                         <Table striped responsive>
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>Naam</th>
                                     <th>Voornaam</th>
                                     <th>Geboortedatum</th>
@@ -101,27 +102,26 @@ class KindOverview extends React.Component {
                                     <th>Medicatie toedienen?</th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>{this.state.kinderen.map((row, key) => {
                                 return (
                                     <tr key={key}>
+                                        <td><Link to={'/profile/kind/' + row.idkind}><i className="fa fa-arrow-right"></i></Link></td>
                                         <td>{row.naam}</td>
                                         <td>{row.voornaam}</td>
                                         <td>{row.gebdatum}</td>
                                         <td>{this.boolToText(row.zwemmen)}</td>
                                         <td>{this.boolToText(row.sport)}</td>
                                         <td>{this.boolToText(row.dafi)}</td>
-                                        <td><KoppelVoogd idkind={row.idkind} login={this.state.user.login}/></td>
+                                        <td><KoppelVoogd idkind={row.idkind} login={this.state.user.login} /></td>
                                         <td><UpdateKind idkind={row.idkind} /></td>
                                         <td><DeleteKind idkind={row.idkind} naam={row.naam} voornaam={row.voornaam} id={key} /></td>
-                                        <td><Link to={'/profile/'+this.state.user.login+'/kind/'+row.idkind}><i className="fa fa-arrow-right"></i></Link></td>
                                     </tr>
                                 )
                             })}</tbody>
                         </Table>
-                        <KindForm login={this.state.user.login}/>
+                        <KindForm login={this.state.user.login} />
                     </Col>
                 </Row>
             </div>

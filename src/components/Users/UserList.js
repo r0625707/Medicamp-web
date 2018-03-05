@@ -3,8 +3,6 @@ import { Table } from 'reactstrap';
 import axios from 'axios';
 import DeleteUser from './DeleteUser';
 import UpdateForm from './UpdateForm';
-import {Link} from 'react-router-dom';
-import AuthenticationStore from '../../stores/AuthenticationStore';
 
 class UserList extends React.Component {
 
@@ -47,7 +45,6 @@ class UserList extends React.Component {
                         <th>tel.</th>
                         <th></th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>{this.state.data.map(function(row, key) {
@@ -58,12 +55,11 @@ class UserList extends React.Component {
                             <td>{row.voornaam}</td>
                             <td>{row.login}</td>
                             <td>{row.tel}</td>
-                            <td><Link to={'/profile/'+row.login}><i class="fa fa-user"></i></Link></td>
                             <td>
                                 <UpdateForm login={row.login} />  
                             </td>
                             <td>
-                                <DeleteUser naam={row.naam} voornaam={row.voornaam} login={row.login} id={key} />
+                                <DeleteUser naam={row.naam} voornaam={row.voornaam} id={key} />
                             </td>
                         </tr>
                     )

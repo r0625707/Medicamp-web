@@ -17,9 +17,7 @@ class Header extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false,
-            isAuthenticated: localStorage.getItem('isAuthenticated'),
-            role: localStorage.getItem('role')
+            isOpen: false
         };
 
         this.authItems = this.authItems.bind(this);
@@ -32,7 +30,7 @@ class Header extends React.Component {
     }
 
     authItems() {
-        if (this.state.isAuthenticated && this.state.role !== -1) {
+        if (localStorage.getItem('isAuthenticated') && localStorage.getItem('role') !== -1) {
             return (
                 <div>
                     <NavItem>
@@ -45,7 +43,7 @@ class Header extends React.Component {
             )
         }
 
-        if (this.state.isAuthenticated && this.state.role === -1) {
+        if (localStorage.getItem('isAuthenticated') && localStorage.getItem('role') === -1) {
             return (
                 <div>
                     <NavItem>

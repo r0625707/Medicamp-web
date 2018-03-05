@@ -22,7 +22,7 @@ class TakCard extends React.Component {
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/tak", this.headers)
+        axios.get("https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/tak", this.headers)
             .then((response) => {
                 this.setState({
                     data: response.data
@@ -36,7 +36,7 @@ class TakCard extends React.Component {
 
     render() {
 
-        if(this.props.role === -1 || this.props.role === 1) {
+        if(localStorage.getItem('role')[1] === '0' || localStorage.getItem('role')[1] === '2') {
             return null;
         }
 

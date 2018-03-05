@@ -30,6 +30,10 @@ class ZiekteCard extends React.Component {
         });
     }
 
+    componentDidMount() {
+        this.loadData();
+    }
+
     render() {
         return(
             <Col xs="12" sm="12" md="6" lg="3">
@@ -53,6 +57,7 @@ class ZiekteCard extends React.Component {
                         <ZiekteForm idkind={this.props.idkind} />
                     </CardFooter>
                 </Card>
+                <br />
             </Col>
         )
     }

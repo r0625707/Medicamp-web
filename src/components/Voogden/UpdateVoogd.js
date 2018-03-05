@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
 
-class VoogdForm extends React.Component {
+class UpdateVoogd extends React.Component {
 
     constructor(props) {
         super(props);
@@ -28,7 +28,7 @@ class VoogdForm extends React.Component {
         this.onBusChange = this.onBusChange.bind(this);
         this.onPostcodeChange = this.onPostcodeChange.bind(this);
         this.onPlaatsChange = this.onPlaatsChange.bind(this);
-        this.postData = this.postData.bind(this);
+        this.update = this.update.bind(this);
 
         this.headers = {
             headers: {
@@ -97,19 +97,8 @@ class VoogdForm extends React.Component {
         });
     }
 
-    postData() {
-        var url;
-        switch(this.props.for) {
-            case "kind":
-                url="https://medicamp-so.appspot.com/api/voogd/"+localStorage.getItem('login')+"/kind/"+this.props.id;
-                break
-            case "user":
-                url="https://medicamp-so.appspot.com/api/voogd/"+localStorage.getItem('login')+"/";
-                break
-            default:
-                url="";
-        }
-        axios.post(url, {
+    update() {
+        axios.put("https://medicamp-so.appspot.com/api/voogd/"+this.props.idvoogd, {
             naam: this.state.naam,
             voornaam: this.state.voornaam,
             tel: this.state.tel,
@@ -127,28 +116,41 @@ class VoogdForm extends React.Component {
         });
     }
 
+    componentDidMount() {
+        this.setState({
+            naam: this.props.naam,
+            voornaam: this.props.voornaam,
+            tel: this.props.tel,
+            straat: this.props.straat,
+            huisnr: this.props.huisnr,
+            bus: this.props.bus,
+            postcode: this.props.postcode,
+            plaats: this.props.plaats
+        });
+    }
+
     render() {
         return (
             <div>
-                <Button onClick={this.toggle} color="success" style={{ cursor: 'pointer' }}>Toevoegen</Button>
+                <Button onClick={this.toggle} color="warning" style={{ cursor: 'pointer' }}><i className="fa fa-edit"></i></Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Contact toevoegen</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>{this.state.voornaam} {this.state.naam} Bewerken</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>
-                                <Label for="naam">Naam*</Label>
+                                <Label for="naam">Naam</Label>
                                 <Input type="text" name="naam" id="naam" value={this.state.naam} onChange={this.onNaamChange} />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="voornaam">Voornaam*</Label>
+                                <Label for="voornaam">Voornaam</Label>
                                 <Input type="text" name="voornaam" id="voornaam" value={this.state.voornaam} onChange={this.onVoornaamChange} />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="tel">Telefoon* (bij voorkeur GSM nummer)</Label>
+                                <Label for="tel">Telefoon (bij voorkeur GSM nummer)</Label>
                                 <Input type="phone" name="tel" id="tel" value={this.state.tel} onChange={this.onTelChange} />
                             </FormGroup>
                             <FormGroup tag="fieldset">
-                                <legend>Adres*</legend>
+                                <legend>Adres</legend>
                                 <FormGroup>
                                     <Label for="straat">Straatnaam</Label>
                                     <Input type="text" name="straat" id="straat" value={this.state.straat} onChange={this.onStraatChange} />
@@ -171,17 +173,16 @@ class VoogdForm extends React.Component {
                                 </FormGroup>
                             </FormGroup>
                         </Form>
-                        <p>* velden zijn verplicht </p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.postData} style={{ cursor: 'pointer' }}>Opslaan</Button>
+                        <Button color="primary" onClick={this.update} style={{ cursor: 'pointer' }}>Opslaan</Button>
                         <Button onClick={this.toggle} style={{ cursor: 'pointer' }}>Annuleren</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.error} toggle={this.toggleError}>
                     <ModalHeader color="warning"><i className="fa fa-exclamation-triangle"></i> Foutmelding</ModalHeader>
                     <ModalBody>
-                        <p>Er ging iets mis bij het aanmaken van de contactpersoon.</p>
+                        <p>Er ging iets mis bij het bewerken van de contactpersoon.</p>
                         <p>Controleer de in te vullen velden en probeer het opnieuw.</p>
                     </ModalBody>
                     <ModalFooter>
@@ -193,4 +194,4 @@ class VoogdForm extends React.Component {
     }
 }
 
-export default VoogdForm;
+export default UpdateVoogd;

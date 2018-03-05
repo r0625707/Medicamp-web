@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios';
 
-class MedicatieForm extends React.Component {
+class DieetForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -10,11 +10,11 @@ class MedicatieForm extends React.Component {
             idkind: this.props.idkind,
             modal: false,
             naam: null,
-            opmerking: ""
+            omschrijving: ""
         };
         this.toggle = this.toggle.bind(this);
         this.onNaamChange = this.onNaamChange.bind(this);
-        this.onOpmerkingChange = this.onOpmerkingChange.bind(this);
+        this.onOmschrijvingChange = this.onOmschrijvingChange.bind(this);
         this.postData = this.postData.bind(this);
 
         this.headers = {
@@ -36,16 +36,16 @@ class MedicatieForm extends React.Component {
         });
     }
 
-    onOpmerkingChange(event) {
+    onOmschrijvingChange(event) {
         this.setState({
-            opmerking: event.target.value
+            omschrijving: event.target.value
         });
     }
 
     postData() {
-        axios.post("https://medicamp-so.appspot.com/api/medicatie/kind/"+this.props.idkind, {
+        axios.post("https://medicamp-so.appspot.com/api/dieet/kind/"+this.props.idkind, {
             naam: this.state.naam,
-            opmerking: this.state.opmerking
+            omschrijving: this.state.omschrijving
         }, this.headers)
         .then((response) => {
             this.toggle();
@@ -57,16 +57,16 @@ class MedicatieForm extends React.Component {
             <div>
                 <Button color="success" onClick={this.toggle}>Toevoegen</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Medicatie toevoegen</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Dieet toevoegen</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>
                                 <Label for="naam">Naam*</Label>
-                                <Input type="text" name="naam" id="naam" value={this.state.naam} onChange={this.onNaamChange} placeHolder="Naam van de medicatie" />
+                                <Input type="text" name="naam" id="naam" value={this.state.naam} onChange={this.onNaamChange} placeHolder="Naam van het dieet" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="opmerking">Opmerking</Label>
-                                <Input type="textarea" name="opmerking" id="opmerking" value={this.state.opmerking} onChange={this.onOpmerkingChange} placeHolder="Eventuele opmerkingen bij de medicatie" />
+                                <Label for="omschrijving">Omschrijving</Label>
+                                <Input type="textarea" name="omschrijving" id="omschrijving" value={this.state.omschrijving} onChange={this.onOmschrijvingChange} placeHolder="Omschrijving van het dieet" />
                             </FormGroup>
                         </Form>
                         <p>* Velden zijn verplicht</p>
@@ -81,4 +81,4 @@ class MedicatieForm extends React.Component {
     }
 }
 
-export default MedicatieForm;
+export default DieetForm;

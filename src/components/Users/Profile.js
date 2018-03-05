@@ -7,7 +7,6 @@ import GroepCard from '../Groepen/GroepCard';
 import TakCard from '../Takken/TakCard';
 import UpdateForm from './UpdateForm';
 import Loading from '../Loading';
-import AuthenticationStore from '../../stores/AuthenticationStore';
 
 class Profile extends React.Component {
 
@@ -15,14 +14,13 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             data: {},
-            role: "",
             loading: true
         };
         this.loadData = this.loadData.bind(this);
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.match.params.login + "/", {
+        axios.get("https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/", {
             headers: {
                 Authorization: localStorage.getItem('token')
             }
@@ -31,32 +29,6 @@ class Profile extends React.Component {
             this.setState({
                 data: response.data
             });
-            switch (response.data.role) {
-                case -1:
-                    this.setState({
-                        role: "administrator"
-                    });
-                    break;
-                case 0:
-                    this.setState({
-                        role: "hoofdleiding"
-                    });
-                    break;
-                case 1:
-                    this.setState({
-                        role: "ouder"
-                    });
-                    break;
-                case 2:
-                    this.setState({
-                        role: "leiding"
-                    });
-                    break;
-                default:
-                    this.setState({
-                        role: ""
-                    });
-            }
         })
             .then((response) => {
                 this.setState({
@@ -90,15 +62,13 @@ class Profile extends React.Component {
                 <Row>
                     <Col xs="12" sm="12" md="8" lg="6">
                         <h2>{this.state.data.voornaam} {this.state.data.naam} <UpdateForm login={this.props.match.params.login} /></h2>
-                        <p>({this.state.role})</p>
-                        <p>Email-adres: <a href={'mailto:' + this.state.data.login}>{this.state.data.login}</a></p>
                     </Col>
                 </Row>
                 <Row>
-                    <GroepCard login={this.props.match.params.login} role={this.state.data.role} />
-                    <TakCard login={this.props.match.params.login} role={this.state.data.role} />
-                    <KindCard login={this.props.match.params.login} role={this.state.data.role} />
-                    <VoogdCard id={this.props.match.params.login} login={this.props.match.params.login} role={this.state.data.role} for="user" />
+                    <GroepCard />
+                    <TakCard />
+                    <KindCard />
+                    <VoogdCard role={this.state.role} for="user" />
                 </Row>
             </div>
         );

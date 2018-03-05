@@ -29,7 +29,7 @@ class KoppelVoogd extends React.Component {
     }
 
     loadVoogden() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/voogd", this.headers)
+        axios.get("https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/voogd", this.headers)
             .then((response) => {
                 this.setState({
                     voogden: response.data
@@ -38,7 +38,7 @@ class KoppelVoogd extends React.Component {
     }
 
     loadKind() {
-        axios.get("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind), this.headers
+        axios.get("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind, this.headers)
             .then((response) => {
                 this.setState({
                     kind: response.data
@@ -65,7 +65,7 @@ class KoppelVoogd extends React.Component {
     }
 
     postData() {
-        axios.post("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind + "/voogd/" + this.state.idvoogd, this.headers)
+        axios.post("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind + "/voogd/" + this.state.idvoogd, null, this.headers)
             .then((response) => {
                 this.toggle();
             })
@@ -79,12 +79,12 @@ class KoppelVoogd extends React.Component {
     render() {
         return (
             <div>
-                <Button onClick={this.toggle} id={'koppel'+this.props.idkind}><i className="fa fa-user-plus"></i></Button>
+                <Button color="primary" onClick={this.toggle} id={'koppel'+this.props.idkind}><i className="fa fa-user-plus"></i></Button>
                 <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'koppel'+this.props.idkind} toggle={this.tooltipToggle}>
                     contact koppelen
                 </Tooltip>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                    <ModalHeader>Contact koppelen aan {this.state.kind.voornaam}</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Contact koppelen aan {this.state.kind.voornaam}</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup tag="fieldset">

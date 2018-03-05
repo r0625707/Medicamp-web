@@ -15,7 +15,7 @@ class ZiekteForm extends React.Component {
         };
         this.toggle = this.toggle.bind(this);
         this.onNaamChange = this.onNaamChange.bind(this);
-        this.onBehandelingChange = this.onOpmerkingChange.bind(this);
+        this.onBehandelingChange = this.onBehandelingChange.bind(this);
         this.onSymptomenChange = this.onSymptomenChange.bind(this);
         this.postData = this.postData.bind(this);
 
@@ -40,7 +40,7 @@ class ZiekteForm extends React.Component {
 
     onBehandelingChange(event) {
         this.setState({
-            opmerking: event.target.value
+            behandeling: event.target.value
         });
     }
 
@@ -66,7 +66,7 @@ class ZiekteForm extends React.Component {
             <div>
                 <Button color="success" onClick={this.toggle}>Toevoegen</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader>Aandoening toevoegen</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Aandoening toevoegen</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>
@@ -79,7 +79,7 @@ class ZiekteForm extends React.Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="behandeling">Behandeling</Label>
-                                <Input type="textarea" name="behandeling" id="behandeling" value={this.state.behandeling} onChange={this.onBehandelingChange} placeHolder="Standaard behandeling die de leiding kan toedieden bij het optreden van de symptomen" />
+                                <Input type="textarea" name="behandeling" id="behandeling" value={this.state.behandeling} onChange={this.onBehandelingChange} placeHolder="Standaard behandeling die de leiding kan toedienen bij het optreden van de symptomen" />
                             </FormGroup>
                         </Form>
                         <p>* Velden zijn verplicht</p>

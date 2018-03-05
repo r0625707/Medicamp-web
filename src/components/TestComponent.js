@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col, Jumbotron } from 'reactstrap';
 import LoginForm from './Users/LoginForm'
 import UserForm from './Users/UserForm';
-import AuthenticationStore from '../stores/AuthenticationStore';
 
 class TestComponent extends React.Component {
 

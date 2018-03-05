@@ -4,6 +4,7 @@ import {
     CardHeader, CardFooter, Table
 } from 'reactstrap';
 import axios from 'axios';
+import DieetForm from './DieetForm';
 
 class DieetCard extends React.Component {
 
@@ -29,6 +30,10 @@ class DieetCard extends React.Component {
         });
     }
 
+    componentDidMount() {
+        this.loadData();
+    }
+
     render() {
         return(
             <Col xs="12" sm="12" md="6" lg="3">
@@ -49,9 +54,10 @@ class DieetCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        
+                        <DieetForm idkind={this.props.idkind} />
                     </CardFooter>
                 </Card>
+                <br />
             </Col>
         )
     }

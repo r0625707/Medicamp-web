@@ -86,8 +86,8 @@ class KindDetail extends React.Component {
                 <Row>
                     <Col xs="12" sm="12" md="12" lg="12">
                         <Breadcrumb>
-                            <BreadcrumbItem><Link to={'/profile/' + this.state.user.login}>{this.state.user.voornaam} {this.state.user.naam}</Link></BreadcrumbItem>
-                            <BreadcrumbItem><Link to={'/profile/' + this.state.user.login + '/kind'}>Kinderen</Link></BreadcrumbItem>
+                            <BreadcrumbItem><Link to='/profile/'>{localStorage.getItem('voornaam')} {localStorage.getItem('naam')}</Link></BreadcrumbItem>
+                            <BreadcrumbItem><Link to='/profile/kind'>Kinderen</Link></BreadcrumbItem>
                             <BreadcrumbItem active>{this.state.kind.voornaam} {this.state.kind.naam}</BreadcrumbItem>
                         </Breadcrumb>
                     </Col>

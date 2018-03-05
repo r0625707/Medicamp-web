@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import AuthenticationStore from '../../stores/AuthenticationStore';
 
 class UpdateForm extends React.Component {
 
@@ -70,7 +69,7 @@ class UpdateForm extends React.Component {
     }
 
     updateUser() {
-        axios.put('https://medicamp-so.appspot.com/api/user/' + this.props.login + '/', {
+        axios.put('https://medicamp-so.appspot.com/api/user/' + localStorage.getItem('login') + '/', {
                 login: this.state.login,
                 naam: this.state.naam,
                 role: this.state.role,
@@ -83,7 +82,7 @@ class UpdateForm extends React.Component {
     }
 
 loadUser() {
-    axios.get("https://medicamp-so.appspot.com/api/user/" + this.props.login + "/", this.headers)
+    axios.get("https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/", this.headers)
         .then((response) => {
             this.setState({
                 login: response.data.login,
@@ -114,10 +113,10 @@ render() {
                                     value={this.state.role}
                                     onChange={this.onRoleChange}
                                 >
-                                    <option value="-1">Admin</option>
-                                    <option value="0">Hoofdleiding</option>
-                                    <option value="1">Ouder</option>
-                                    <option value="2">Leiding</option>
+                                    <option value="0">Admin</option>
+                                    <option value="1">Hoofdleiding</option>
+                                    <option value="2">Ouder</option>
+                                    <option value="3">Leiding</option>
                                 </select>
                             </FormGroup>
                         </FormGroup>

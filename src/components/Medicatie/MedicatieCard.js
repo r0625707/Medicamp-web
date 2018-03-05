@@ -58,6 +58,7 @@ class MedicatieCard extends React.Component {
                         <MedicatieForm idkind={this.props.idkind}/>
                     </CardFooter>
                 </Card>
+                <br />
             </Col>
         )
     }

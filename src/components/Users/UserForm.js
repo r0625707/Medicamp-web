@@ -116,10 +116,10 @@ class UserForm extends React.Component {
                                         value={this.state.role}
                                         onChange={this.onRoleChange}
                                     >
-                                        <option value="-1">Admin</option>
-                                        <option value="0">Hoofdleiding</option>
-                                        <option value="1">Ouder</option>
-                                        <option value="2">Leiding</option>
+                                        <option value="0">Admin</option>
+                                        <option value="1">Hoofdleiding</option>
+                                        <option value="2">Ouder</option>
+                                        <option value="3">Leiding</option>
                                     </select>
                                 </FormGroup>
                             </FormGroup>

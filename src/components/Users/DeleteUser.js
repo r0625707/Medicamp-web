@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Popover, PopoverBody } from 'reactstrap';
 import axios from 'axios';
-import AuthenticationStore from '../../stores/AuthenticationStore';
 
 class DeleteUser extends React.Component {
     constructor(props) {
@@ -27,7 +26,7 @@ class DeleteUser extends React.Component {
     }
 
     delete() {
-        axios.delete("https://medicamp-so.appspot.com/api/user/" + this.props.login+"/", this.headers)
+        axios.delete("https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') +"/", this.headers)
         .then(this.toggle);
     }
 

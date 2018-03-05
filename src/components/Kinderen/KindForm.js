@@ -99,7 +99,7 @@ class KindForm extends React.Component {
     }
 
     postData() {
-        axios.post('https://medicamp-so.appspot.com/api/kind/'+ this.props.login +'/', {
+        axios.post('https://medicamp-so.appspot.com/api/kind/'+ localStorage.getItem('login') +'/', {
             naam: this.state.naam,
             voornaam: this.state.voornaam,
             gebdatum: this.state.gebdatum,

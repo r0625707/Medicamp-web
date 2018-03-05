@@ -5,6 +5,8 @@ import {
 } from 'reactstrap';
 import axios from 'axios';
 import VoogdForm from './VoogdForm';
+import UpdateVoogd from './UpdateVoogd';
+import DeleteVoogd from './DeleteVoogd';
 
 class VoogdCard extends React.Component {
 
@@ -24,15 +26,15 @@ class VoogdCard extends React.Component {
 
     loadData() {
         var link;
-        switch(this.props.for) {
+        switch (this.props.for) {
             case "kind":
-                link = "https://medicamp-so.appspot.com/api/kind/"+this.props.id+"/voogd";
+                link = "https://medicamp-so.appspot.com/api/kind/" + this.props.id + "/voogd";
                 break;
             case "user":
-                link = "https://medicamp-so.appspot.com/api/user/"+this.props.id+"/voogd";
+                link = "https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/voogd";
                 break;
             default:
-                link="";
+                link = "";
         }
         axios.get(link, this.headers)
             .then((response) => {
@@ -48,7 +50,7 @@ class VoogdCard extends React.Component {
 
     render() {
 
-        if(this.props.role === -1 || this.props.role === 2) {
+        if (this.props.for === "user" && (localStorage.getItem('role')[1] === '0' || localStorage.getItem('role')[1] === '3')) {
             return null;
         }
 
@@ -56,14 +58,26 @@ class VoogdCard extends React.Component {
             <Col xs="12" sm="12" md="6" lg="3">
                 <Card>
                     <CardHeader>
-                        Contactpersonen
+                        <b>Contactpersonen</b>
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>
-                            <tbody>{this.state.data.map(function (row, key) {
+                            <tbody>{this.state.data.map((row, key) => {
                                 return (
                                     <tr key={key}>
+                                        <td></td>
                                         <td>{row.voornaam} {row.naam}</td>
+                                        <td><UpdateVoogd idvoogd={row.idvoogd}
+                                            naam={row.naam}
+                                            voornaam={row.voornaam}
+                                            tel={row.tel}
+                                            straat={row.straat}
+                                            huisnr={row.huisnr}
+                                            bus={row.bus}
+                                            postcode={row.postcode}
+                                            plaats={row.plaats} />
+                                        </td>
+                                        <td><DeleteVoogd for={this.props.for} idvoogd={row.idvoogd} naam={row.naam} voornaam={row.voornaam} idkind={this.props.id} /></td>
                                     </tr>
                                 )
                             })}
@@ -71,9 +85,10 @@ class VoogdCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <VoogdForm login={this.props.login} for={this.props.for} id={this.props.id}/>
+                        <VoogdForm login={this.props.login} for={this.props.for} id={this.props.id} />
                     </CardFooter>
                 </Card>
+                <br />
             </Col>
         );
     }
