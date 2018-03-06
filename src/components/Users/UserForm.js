@@ -117,7 +117,7 @@ class UserForm extends React.Component {
                                         onChange={this.onRoleChange}
                                     >
                                         <option value="0">Admin</option>
-                                        <option value="1">Hoofdleiding</option>
+                                        <option value="1">Groep</option>
                                         <option value="2">Ouder</option>
                                         <option value="3">Leiding</option>
                                     </select>
@@ -144,6 +144,29 @@ class UserForm extends React.Component {
                                 <Input type="password" name="password" id="password" value={this.state.password} onChange={this.onPasswordChange} />
                                 <Label for="passwordrep">Herhaal wachtwoord*</Label>
                                 <Input type="password" name="passwordrep" id="passwordrep" value={this.state.passwordrep} onChange={this.onPasswordrepChange} />
+                            </FormGroup>
+                            <FormGroup tag="fieldset">
+                                <legend>Adres*</legend>
+                                <FormGroup>
+                                    <Label for="straat">Straatnaam</Label>
+                                    <Input type="text" name="straat" id="straat" value={this.state.straat} onChange={this.onStraatChange} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="huisnr">Huisnr.</Label>
+                                    <Input type="number" name="huisnr" id="huisnr" value={this.state.huisnr} onChange={this.onHuisnrChange} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="bus">Bus</Label>
+                                    <Input type="text" name="bus" id="bus" value={this.state.bus} onChange={this.onBusChange} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="postcode">Postcode</Label>
+                                    <Input type="text" name="postcode" id="postcode" value={this.state.postcode} onChange={this.onPostcodeChange} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="plaats">Plaats</Label>
+                                    <Input type="text" name="plaats" id="plaats" value={this.state.plaats} onChange={this.onPlaatsChange} />
+                                </FormGroup>
                             </FormGroup>
                         </Form>
                         <p>* velden zijn verplicht </p>
