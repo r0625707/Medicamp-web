@@ -144,7 +144,7 @@ class KindDetail extends React.Component {
                 </Row>
                 <hr />
                 <Row>
-                    <VoogdCard id={this.props.match.params.idkind} login={this.state.user.login} for="kind" role={this.state.user.role} />
+                    <VoogdCard id={this.props.match.params.idkind} login={localStorage.getItem('login')} for="kind" role={this.state.user.role} />
                     <MedicatieCard idkind={this.props.match.params.idkind} />
                     <ZiekteCard idkind={this.props.match.params.idkind} />
                     <DieetCard idkind={this.props.match.params.idkind} />

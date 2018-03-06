@@ -2,11 +2,11 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios';
 
-class DieetForm extends React.Component {
+class UpdateDieet extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             idkind: this.props.idkind,
             modal: false,
             naam: null,
@@ -15,7 +15,7 @@ class DieetForm extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.onNaamChange = this.onNaamChange.bind(this);
         this.onOmschrijvingChange = this.onOmschrijvingChange.bind(this);
-        this.postData = this.postData.bind(this);
+        this.update = this.update.bind(this);
 
         this.headers = {
             headers: {
@@ -42,26 +42,33 @@ class DieetForm extends React.Component {
         });
     }
 
-    postData() {
-        axios.post("https://medicamp-so.appspot.com/api/dieet/kind/"+this.props.idkind, {
+    update() {
+        axios.put("https://medicamp-so.appspot.com/api/dieet/" + this.props.iddieet, {
             naam: this.state.naam,
             opmerking: this.state.omschrijving
         }, this.headers)
-        .then((response) => {
-            this.toggle();
+            .then((response) => {
+                this.toggle();
+            });
+    }
+
+    componentDidMount() {
+        this.setState({
+            naam: this.props.naam,
+            omschrijving: this.props.omschrijving
         });
     }
 
     render() {
-        return(
+        return (
             <div>
-                <Button color="success" onClick={this.toggle}>Toevoegen</Button>
+                <Button color="warning" onClick={this.toggle}><i className="fa fa-edit"></i></Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Dieet toevoegen</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Dieet bewerken</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>
-                                <Label for="naam">Naam*</Label>
+                                <Label for="naam">Naam</Label>
                                 <Input type="text" name="naam" id="naam" value={this.state.naam} onChange={this.onNaamChange} placeHolder="Naam van het dieet" />
                             </FormGroup>
                             <FormGroup>
@@ -69,10 +76,9 @@ class DieetForm extends React.Component {
                                 <Input type="textarea" name="omschrijving" id="omschrijving" value={this.state.omschrijving} onChange={this.onOmschrijvingChange} placeHolder="Omschrijving van het dieet" />
                             </FormGroup>
                         </Form>
-                        <p>* Velden zijn verplicht</p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.postData}>Opslaan</Button>
+                        <Button color="primary" onClick={this.update}>Opslaan</Button>
                         <Button onClick={this.toggle}>Annuleren</Button>
                     </ModalFooter>
                 </Modal>
@@ -81,4 +87,4 @@ class DieetForm extends React.Component {
     }
 }
 
-export default DieetForm;
+export default UpdateDieet;

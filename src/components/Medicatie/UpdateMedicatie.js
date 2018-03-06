@@ -2,20 +2,20 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios';
 
-class DieetForm extends React.Component {
+class UpdateMedicatie extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             idkind: this.props.idkind,
             modal: false,
             naam: null,
-            omschrijving: ""
+            opmerking: ""
         };
         this.toggle = this.toggle.bind(this);
         this.onNaamChange = this.onNaamChange.bind(this);
-        this.onOmschrijvingChange = this.onOmschrijvingChange.bind(this);
-        this.postData = this.postData.bind(this);
+        this.onOpmerkingChange = this.onOpmerkingChange.bind(this);
+        this.update = this.update.bind(this);
 
         this.headers = {
             headers: {
@@ -36,43 +36,49 @@ class DieetForm extends React.Component {
         });
     }
 
-    onOmschrijvingChange(event) {
+    onOpmerkingChange(event) {
         this.setState({
-            omschrijving: event.target.value
+            opmerking: event.target.value
         });
     }
 
-    postData() {
-        axios.post("https://medicamp-so.appspot.com/api/dieet/kind/"+this.props.idkind, {
+    update() {
+        axios.put("https://medicamp-so.appspot.com/api/medicatie/" + this.props.idmedicatie, {
             naam: this.state.naam,
-            opmerking: this.state.omschrijving
+            opmerking: this.state.opmerking
         }, this.headers)
-        .then((response) => {
-            this.toggle();
+            .then((response) => {
+                this.toggle();
+            });
+    }
+
+    componentDidMount() {
+        this.setState({
+            naam: this.props.naam,
+            opmerking: this.props.opmerking
         });
     }
 
     render() {
-        return(
+        return (
             <div>
-                <Button color="success" onClick={this.toggle}>Toevoegen</Button>
+                <Button color="warning" onClick={this.toggle}><i className="fa fa-edit"></i></Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Dieet toevoegen</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Medicatie bewerken</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>
-                                <Label for="naam">Naam*</Label>
-                                <Input type="text" name="naam" id="naam" value={this.state.naam} onChange={this.onNaamChange} placeHolder="Naam van het dieet" />
+                                <Label for="naam">Naam</Label>
+                                <Input type="text" name="naam" id="naam" value={this.state.naam} onChange={this.onNaamChange} placeholder="Naam van het dieet" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="omschrijving">Omschrijving</Label>
-                                <Input type="textarea" name="omschrijving" id="omschrijving" value={this.state.omschrijving} onChange={this.onOmschrijvingChange} placeHolder="Omschrijving van het dieet" />
+                                <Label for="opmerking">Opmerking</Label>
+                                <Input type="textarea" name="opmerking" id="opmerking" value={this.state.opmerking} onChange={this.onOpmerkingChange} placeholder="Opmerkingen bij de medicatie" />
                             </FormGroup>
                         </Form>
-                        <p>* Velden zijn verplicht</p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.postData}>Opslaan</Button>
+                        <Button color="primary" onClick={this.update}>Opslaan</Button>
                         <Button onClick={this.toggle}>Annuleren</Button>
                     </ModalFooter>
                 </Modal>
@@ -81,4 +87,4 @@ class DieetForm extends React.Component {
     }
 }
 
-export default DieetForm;
+export default UpdateMedicatie;

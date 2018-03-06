@@ -3,8 +3,11 @@ import {
     Card, CardBody, Col,
     CardHeader, CardFooter, Table
 } from 'reactstrap';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import DieetForm from './DieetForm';
+import UpdateDieet from './UpdateDieet';
+import DeleteDieet from './DeleteDieet';
 
 class DieetCard extends React.Component {
 
@@ -22,12 +25,12 @@ class DieetCard extends React.Component {
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/kind/"+this.props.idkind+"/dieet", this.headers)
-        .then((response) => {
-            this.setState({
-                data: response.data
+        axios.get("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind + "/dieet", this.headers)
+            .then((response) => {
+                this.setState({
+                    data: response.data
+                });
             });
-        });
     }
 
     componentDidMount() {
@@ -35,11 +38,11 @@ class DieetCard extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <Col xs="12" sm="12" md="6" lg="3">
                 <Card>
                     <CardHeader>
-                        Dieeten
+                        <Link to={'/profile/kind/'+this.props.idkind+'/dieet'}><b>Dieeten</b></Link>
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>
@@ -47,6 +50,10 @@ class DieetCard extends React.Component {
                                 return (
                                     <tr key={key}>
                                         <td>{row.naam}</td>
+                                        <td><UpdateDieet iddieet={row.iddieet}
+                                            naam={row.naam}
+                                            omschrijving={row.opmerking} /></td>
+                                        <td><DeleteDieet iddieet={row.iddieet} naam={row.naam} /></td>
                                     </tr>
                                 )
                             })}

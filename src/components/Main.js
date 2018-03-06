@@ -10,6 +10,9 @@ import KindDetail from './Kinderen/KindDetail';
 import Logout from './Users/Logout';
 import VoogdOverviewKind from './Voogden/VoogdOverviewKind';
 import VoogdOverviewUser from './Voogden/VoogdOverviewUser';
+import DieetOverview from './Dieet/DieetOverview';
+import MedicatieOverview from './Medicatie/MedicatieOverview';
+import ZiekteOverview from './Ziekte/ZiekteOverview';
 
 class Main extends React.Component {
     render() {
@@ -25,6 +28,9 @@ class Main extends React.Component {
                     <Route exact path='/profile/kind' component={KindOverview} />
                     <Route exact path='/profile/kind/:idkind' component={KindDetail} />
                     <Route exact path='/profile/kind/:idkind/voogd' component={VoogdOverviewKind} />
+                    <Route exact path='/profile/kind/:idkind/dieet' component={DieetOverview} />
+                    <Route exact path='/profile/kind/:idkind/medicatie' component={MedicatieOverview} />
+                    <Route exact path='/profile/kind/:idkind/ziekte' component={ZiekteOverview} />
                     <Route exact path='/logout' component={Logout} />
                 </Switch>
             </main>

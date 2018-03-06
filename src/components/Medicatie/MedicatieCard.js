@@ -4,7 +4,10 @@ import {
     CardHeader, CardFooter, Table
 } from 'reactstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import MedicatieForm from './MedicatieForm';
+import UpdateMedicatie from './UpdateMedicatie';
+import DeleteMedicatie from './DeleteMedicatie';
 
 class MedicatieCard extends React.Component {
 
@@ -23,12 +26,12 @@ class MedicatieCard extends React.Component {
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/kind/"+this.props.idkind+"/medicatie", this.headers)
-        .then((response) => {
-            this.setState({
-                data: response.data
+        axios.get("https://medicamp-so.appspot.com/api/kind/" + this.props.idkind + "/medicatie", this.headers)
+            .then((response) => {
+                this.setState({
+                    data: response.data
+                });
             });
-        });
     }
 
     componentDidMount() {
@@ -36,11 +39,11 @@ class MedicatieCard extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <Col xs="12" sm="12" md="6" lg="3">
                 <Card>
                     <CardHeader>
-                        Medicatie
+                        <Link to={'/profile/kind/'+this.props.idkind+'/medicatie'}><b>Medicatie</b></Link>
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>
@@ -48,6 +51,10 @@ class MedicatieCard extends React.Component {
                                 return (
                                     <tr key={key}>
                                         <td>{row.naam}</td>
+                                        <td><UpdateMedicatie idmedicatie={row.idmedicatie}
+                                            naam={row.naam}
+                                            opmerking={row.opmerking} /></td>
+                                        <td><DeleteMedicatie idmedicatie={row.idmedicatie} naam={row.naam} /></td>
                                     </tr>
                                 )
                             })}
@@ -55,7 +62,7 @@ class MedicatieCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <MedicatieForm idkind={this.props.idkind}/>
+                        <MedicatieForm idkind={this.props.idkind} />
                     </CardFooter>
                 </Card>
                 <br />
