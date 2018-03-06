@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import MedicatieForm from './MedicatieForm';
 import UpdateMedicatie from './UpdateMedicatie';
 import DeleteMedicatie from './DeleteMedicatie';
+import TijdstipForm from './Tijdstip/TijdstipForm';
 
 class MedicatieCard extends React.Component {
 
@@ -51,6 +52,7 @@ class MedicatieCard extends React.Component {
                                 return (
                                     <tr key={key}>
                                         <td>{row.naam}</td>
+                                        <td><TijdstipForm idmedicatie={row.idmedicatie} /></td>
                                         <td><UpdateMedicatie idmedicatie={row.idmedicatie}
                                             naam={row.naam}
                                             opmerking={row.opmerking} /></td>
