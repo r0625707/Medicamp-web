@@ -65,6 +65,9 @@ class Profile extends React.Component {
                     </Col>
                 </Row>
                 <Row>
+                    
+                </Row>
+                <Row>
                     <GroepCard />
                     <TakCard />
                     <KindCard />

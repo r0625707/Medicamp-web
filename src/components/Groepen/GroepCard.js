@@ -4,13 +4,16 @@ import {
     CardHeader, CardFooter, Table, Button
 } from 'reactstrap';
 import axios from 'axios';
+import GroepForm from './GroepForm';
+import UpdateGroep from './UpdateGroep';
+import {Link} from 'react-router-dom';
 
 class GroepCard extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            groep: {}
         };
 
         this.headers = {
@@ -23,11 +26,12 @@ class GroepCard extends React.Component {
     }
 
     loadData() {
-        axios.get("https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/groep", this.headers)
+        axios.get("https://test-dot-medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/groep", this.headers)
             .then((response) => {
                 this.setState({
-                    data: response.data
+                    groep: response.data[0]
                 });
+                console.log(response.data[0]);
             });
     }
 
@@ -43,26 +47,32 @@ class GroepCard extends React.Component {
 
         return (
             <Col xs="12" sm="12" md="6" lg="3">
-                <Card>
-                    <CardHeader>
-                        Groepen
-                    </CardHeader>
-                    <CardBody>
-                        <Table responsive hover>
-                            <tbody>{this.state.data.map(function (row, key) {
-                                return (
-                                    <tr key={key}>
-                                        <td>{row.naam}</td>
-                                    </tr>
-                                )
-                            })}
-                            </tbody>
-                        </Table>
-                    </CardBody>
-                    <CardFooter>
-                        <Button color="success">+</Button>
-                    </CardFooter>
-                </Card>
+                {
+                    this.state.groep !== undefined ?
+                        <Card>
+                            <CardHeader>
+                                <Link to={'/profile/groep/'+this.state.groep.idgroep} ><b>{this.state.groep.naam}</b></Link>
+                            </CardHeader>
+                            <CardBody>
+                                <p>{this.state.groep.email}</p>
+                                <p>{this.state.groep.straat} {this.state.groep.huisnr}{this.state.groep.bus}, {this.state.groep.postcode} {this.state.groep.plaats}</p>
+                                <p><a href={this.state.groep.link} target="_blank">Link</a></p>
+                            </CardBody>
+                            <CardFooter>
+                                <UpdateGroep idgroep={this.state.groep.idgroep}
+                                    email={this.state.groep.email}
+                                    straat={this.state.groep.straat}
+                                    huisnr={this.state.groep.huisnr}
+                                    bus={this.state.groep.bus}
+                                    postcode={this.state.groep.postcode}
+                                    plaats={this.state.groep.plaats}
+                                    link={this.state.groep.link} />
+                            </CardFooter>
+                        </Card>
+                        :
+                        <GroepForm />
+                }
+                <br />
             </Col>
         );
     }

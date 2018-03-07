@@ -57,6 +57,7 @@ class LoginForm extends React.Component {
             localStorage.setItem('login', token.sub);
             localStorage.setItem('role', token.role);
             localStorage.setItem('isAuthenticated', true);
+            console.log(response.headers.authorization);
             this.setState({
                 isAuthenticated: true
             })

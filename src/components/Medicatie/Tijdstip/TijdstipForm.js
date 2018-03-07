@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Button, Form, FormGroup, Modal, ModalHeader, ModalFooter, ModalBody, Input, Label } from 'reactstrap';
-import Timestamp from 'react-timestamp';
 
 class TijdstipForm extends React.Component {
 

@@ -13,6 +13,7 @@ import VoogdOverviewUser from './Voogden/VoogdOverviewUser';
 import DieetOverview from './Dieet/DieetOverview';
 import MedicatieOverview from './Medicatie/MedicatieOverview';
 import ZiekteOverview from './Ziekte/ZiekteOverview';
+import GroepDetail from './Groepen/GroepDetail';
 
 class Main extends React.Component {
     render() {
@@ -31,6 +32,7 @@ class Main extends React.Component {
                     <Route exact path='/profile/kind/:idkind/dieet' component={DieetOverview} />
                     <Route exact path='/profile/kind/:idkind/medicatie' component={MedicatieOverview} />
                     <Route exact path='/profile/kind/:idkind/ziekte' component={ZiekteOverview} />
+                    <Route exact path='/profile/groep/:idgroep' component={GroepDetail} />
                     <Route exact path='/logout' component={Logout} />
                 </Switch>
             </main>
