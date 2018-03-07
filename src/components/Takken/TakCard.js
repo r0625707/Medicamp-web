@@ -36,7 +36,7 @@ class TakCard extends React.Component {
 
     render() {
 
-        if(localStorage.getItem('role')[1] === '0' || localStorage.getItem('role')[1] === '2') {
+        if(localStorage.getItem('role')[1] === '0' || localStorage.getItem('role')[1] === '2' || localStorage.getItem('role')[1] === '1') {
             return null;
         }
 

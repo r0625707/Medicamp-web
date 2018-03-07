@@ -7,6 +7,7 @@ import axios from 'axios';
 import GroepForm from './GroepForm';
 import UpdateGroep from './UpdateGroep';
 import {Link} from 'react-router-dom';
+import DeleteGroep from './DeleteGroep';
 
 class GroepCard extends React.Component {
 
@@ -67,6 +68,8 @@ class GroepCard extends React.Component {
                                     postcode={this.state.groep.postcode}
                                     plaats={this.state.groep.plaats}
                                     link={this.state.groep.link} />
+                                    <br />
+                                    <DeleteGroep idgroep={this.state.groep.idgroep} naam={this.state.groep.naam} />
                             </CardFooter>
                         </Card>
                         :

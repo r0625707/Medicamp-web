@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Breadcrumb, BreadcrumbItem, Row, Col, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import TakForm from '../Takken/TakForm';
+import UpdateTak from '../Takken/UpdateTak';
+import DeleteTak from '../Takken/VerwijderTak';
 
 class GroepDetail extends React.Component {
 
@@ -66,13 +68,18 @@ class GroepDetail extends React.Component {
                                         <ListGroupItem key={key}>
                                             <ListGroupItemHeading>{item.naam}</ListGroupItemHeading>
                                             <ListGroupItemText>
-                                                {item.omschrijving}
+                                                <p>{item.omschrijving}</p>
+                                                <p><UpdateTak idtak={item.idtak}
+                                                    naam={item.naam}
+                                                    omschrijving={item.omschrijving} /></p>
+                                                <p><DeleteTak idtak={item.idtak} naam={item.naam} /></p>
                                             </ListGroupItemText>
                                         </ListGroupItem>
                                     );
                                 })
                             }
                         </ListGroup>
+                        <br />
                         <TakForm idgroep={this.state.groep.idgroep} />
                     </Col>
                 </Row>
