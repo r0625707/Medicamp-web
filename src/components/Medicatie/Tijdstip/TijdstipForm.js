@@ -44,10 +44,10 @@ class TijdstipForm extends React.Component {
         var formatted = "";
         var tijdstip = event.target.value;
         //yyyy-MM-ddThh:mm
-        var y = tijdstip.slice(0,4);
-        var mo = tijdstip.slice(5,7);
-        var d = tijdstip.slice(8,10);
-        var h = tijdstip.slice(11,13);
+        var y = tijdstip.slice(0, 4);
+        var mo = tijdstip.slice(5, 7);
+        var d = tijdstip.slice(8, 10);
+        var h = tijdstip.slice(11, 13);
         var mi = tijdstip.slice(14);
         formatted += d + "/" + mo + "/" + y + " " + h + ":" + mi
         this.setState({
@@ -66,13 +66,13 @@ class TijdstipForm extends React.Component {
     }
 
     postData() {
-        axios.post("https://medicamp-so.appspot.com/api/tijdstip/"+this.props.idmedicatie, {
+        axios.post("https://medicamp-so.appspot.com/api/tijdstip/" + this.props.idmedicatie, {
             tijdstip: this.state.tijdstip,
             dosis: this.state.dosis
         }, this.headers)
-        .then((response) => {
-            this.loadData();
-        });
+            .then((response) => {
+                this.loadData();
+            });
     }
 
     render() {
@@ -94,19 +94,25 @@ class TijdstipForm extends React.Component {
                             }
                         </ul>
                         <hr />
-                        <Form>
-                            <FormGroup>
-                                <Label for="tijdstip">Tijdstip</Label>
-                                <Input type="datetime-local" name="tijdstip" id="tijdstip" onChange={this.onTijdstipChange} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="dosis">Dosis</Label>
-                                <Input type="text" name="dosis" id="dosis" value={this.state.dosis} onChange={this.onDosisChange} />
-                            </FormGroup>
-                        </Form>
+                        {
+                            !this.props.tak &&
+                            <Form>
+                                <FormGroup>
+                                    <Label for="tijdstip">Tijdstip</Label>
+                                    <Input type="datetime-local" name="tijdstip" id="tijdstip" onChange={this.onTijdstipChange} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="dosis">Dosis</Label>
+                                    <Input type="text" name="dosis" id="dosis" value={this.state.dosis} onChange={this.onDosisChange} />
+                                </FormGroup>
+                            </Form>
+                        }
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.postData}>Opslaan</Button>
+                        {
+                            !this.props.tak &&
+                            <Button color="primary" onClick={this.postData}>Opslaan</Button>
+                        }
                         <Button onClick={this.toggle}>Annuleren</Button>
                     </ModalFooter>
                 </Modal>

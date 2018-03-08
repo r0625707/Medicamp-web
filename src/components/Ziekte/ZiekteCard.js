@@ -46,15 +46,16 @@ class ZiekteCard extends React.Component {
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>
-                            <tbody>{this.state.data.map(function (row, key) {
+                            <tbody>{this.state.data.map((row, key) => {
                                 return (
                                     <tr key={key}>
                                         <td>{row.naam}</td>
                                         <td><UpdateZiekte idziekte={row.idziekte}
                                             naam={row.naam}
                                             symptomen={row.symptomen}
-                                            behandeling={row.behandeling} /></td>
-                                            <td><DeleteZiekte naam={row.naam} idziekte={row.idziekte} /></td>
+                                            behandeling={row.behandeling}
+                                            tak={this.props.tak} /></td>
+                                            <td><DeleteZiekte naam={row.naam} idziekte={row.idziekte} tak={this.props.tak} /></td>
                                     </tr>
                                 )
                             })}
@@ -62,7 +63,10 @@ class ZiekteCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <ZiekteForm idkind={this.props.idkind} />
+                        {
+                            !this.props.tak &&
+                            <ZiekteForm idkind={this.props.idkind} />
+                        }
                     </CardFooter>
                 </Card>
                 <br />

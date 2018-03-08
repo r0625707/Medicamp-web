@@ -14,6 +14,8 @@ import DieetOverview from './Dieet/DieetOverview';
 import MedicatieOverview from './Medicatie/MedicatieOverview';
 import ZiekteOverview from './Ziekte/ZiekteOverview';
 import GroepDetail from './Groepen/GroepDetail';
+import KindOverviewTak from './Takken/KindOverviewTak';
+import KindDetailTak from './Takken/KindDetailTak';
 
 class Main extends React.Component {
     render() {
@@ -33,6 +35,8 @@ class Main extends React.Component {
                     <Route exact path='/profile/kind/:idkind/medicatie' component={MedicatieOverview} />
                     <Route exact path='/profile/kind/:idkind/ziekte' component={ZiekteOverview} />
                     <Route exact path='/profile/groep/:idgroep' component={GroepDetail} />
+                    <Route exact path='/profile/groep/:idgroep/tak/:idtak' component={KindOverviewTak}/>
+                    <Route exact path='/profile/groep/:idgroep/tak/:idtak/kind/:idkind' component={KindDetailTak} />
                     <Route exact path='/logout' component={Logout} />
                 </Switch>
             </main>

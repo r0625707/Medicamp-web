@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Card, CardBody, Col,
-    CardHeader, CardFooter, Table, Button
+    CardHeader, CardFooter
 } from 'reactstrap';
 import axios from 'axios';
 import GroepForm from './GroepForm';

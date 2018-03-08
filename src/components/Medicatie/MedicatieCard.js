@@ -48,15 +48,16 @@ class MedicatieCard extends React.Component {
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>
-                            <tbody>{this.state.data.map(function (row, key) {
+                            <tbody>{this.state.data.map((row, key) => {
                                 return (
                                     <tr key={key}>
                                         <td>{row.naam}</td>
-                                        <td><TijdstipForm idmedicatie={row.idmedicatie} /></td>
+                                        <td><TijdstipForm idmedicatie={row.idmedicatie} tak={this.props.tak} /></td>
                                         <td><UpdateMedicatie idmedicatie={row.idmedicatie}
                                             naam={row.naam}
-                                            opmerking={row.opmerking} /></td>
-                                        <td><DeleteMedicatie idmedicatie={row.idmedicatie} naam={row.naam} /></td>
+                                            opmerking={row.opmerking}
+                                            tak={this.props.tak} /></td>
+                                        <td><DeleteMedicatie idmedicatie={row.idmedicatie} naam={row.naam} tak={this.props.tak} /></td>
                                     </tr>
                                 )
                             })}
@@ -64,7 +65,10 @@ class MedicatieCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <MedicatieForm idkind={this.props.idkind} />
+                        {
+                            !this.props.tak &&
+                            <MedicatieForm idkind={this.props.idkind} />
+                        }
                     </CardFooter>
                 </Card>
                 <br />

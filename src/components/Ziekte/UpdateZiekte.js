@@ -70,6 +70,10 @@ class UpdateZiekte extends React.Component {
     }
 
     render() {
+        if(this.props.tak) {
+            return null;
+        }
+        
         return(
             <div>
                 <Button color="warning" onClick={this.toggle}><i className="fa fa-edit"></i></Button>

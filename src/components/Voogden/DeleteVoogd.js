@@ -52,6 +52,10 @@ class DeleteVoogd extends React.Component {
 
     render() {
 
+        if(this.props.tak) {
+            return null;
+        }
+
         switch (this.props.for) {
             case "user":
                 return (

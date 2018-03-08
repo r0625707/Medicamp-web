@@ -46,14 +46,15 @@ class DieetCard extends React.Component {
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>
-                            <tbody>{this.state.data.map(function (row, key) {
+                            <tbody>{this.state.data.map((row, key) => {
                                 return (
                                     <tr key={key}>
                                         <td>{row.naam}</td>
                                         <td><UpdateDieet iddieet={row.iddieet}
                                             naam={row.naam}
-                                            omschrijving={row.opmerking} /></td>
-                                        <td><DeleteDieet iddieet={row.iddieet} naam={row.naam} /></td>
+                                            omschrijving={row.opmerking}
+                                            tak={this.props.tak} /></td>
+                                        <td><DeleteDieet iddieet={row.iddieet} naam={row.naam} tak={this.props.tak} /></td>
                                     </tr>
                                 )
                             })}
@@ -61,7 +62,10 @@ class DieetCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <DieetForm idkind={this.props.idkind} />
+                        {
+                            !this.props.tak &&
+                            <DieetForm idkind={this.props.idkind} />
+                        }
                     </CardFooter>
                 </Card>
                 <br />

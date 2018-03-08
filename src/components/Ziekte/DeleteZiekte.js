@@ -40,6 +40,10 @@ class DeleteZiekte extends React.Component {
     }
 
     render() {
+        if(this.props.tak) {
+            return null;
+        }
+        
         return(
             <div>
                 <Button color="danger" onClick={this.toggle} id={'Popoverziekte' + this.props.idziekte} style={{cursor:'pointer'}}><i className="fa fa-trash"></i></Button>

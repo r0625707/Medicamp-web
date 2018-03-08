@@ -82,9 +82,10 @@ class VoogdCard extends React.Component {
                                             huisnr={row.huisnr}
                                             bus={row.bus}
                                             postcode={row.postcode}
-                                            plaats={row.plaats} />
+                                            plaats={row.plaats}
+                                            tak={this.props.tak} />
                                         </td>
-                                        <td><DeleteVoogd for={this.props.for} idvoogd={row.idvoogd} naam={row.naam} voornaam={row.voornaam} idkind={this.props.id} /></td>
+                                        <td><DeleteVoogd for={this.props.for} idvoogd={row.idvoogd} naam={row.naam} voornaam={row.voornaam} idkind={this.props.id} tak={this.props.tak}/></td>
                                     </tr>
                                 )
                             })}
@@ -92,7 +93,10 @@ class VoogdCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <VoogdForm login={this.props.login} for={this.props.for} id={this.props.id} />
+                        {
+                            !this.props.tak &&
+                            <VoogdForm login={this.props.login} for={this.props.for} id={this.props.id} />
+                        }
                     </CardFooter>
                 </Card>
                 <br />

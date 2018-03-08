@@ -40,6 +40,9 @@ class DeleteDieet extends React.Component {
     }
 
     render() {
+        if(this.props.tak){
+            return null;
+        }
         return(
             <div>
                 <Button color="danger" onClick={this.toggle} id={'Popover' + this.props.iddieet} style={{cursor:'pointer'}}><i className="fa fa-trash"></i></Button>

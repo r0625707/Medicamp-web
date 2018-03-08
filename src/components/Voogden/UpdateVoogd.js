@@ -130,6 +130,10 @@ class UpdateVoogd extends React.Component {
     }
 
     render() {
+        if(this.props.tak) {
+            return null;
+        }
+        
         return (
             <div>
                 <Button onClick={this.toggle} color="warning" style={{ cursor: 'pointer' }}><i className="fa fa-edit"></i></Button>

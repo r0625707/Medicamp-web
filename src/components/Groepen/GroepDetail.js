@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import TakForm from '../Takken/TakForm';
 import UpdateTak from '../Takken/UpdateTak';
 import DeleteTak from '../Takken/VerwijderTak';
+import RegisterKind from '../Takken/RegisterKind';
 
 class GroepDetail extends React.Component {
 
@@ -54,10 +55,12 @@ class GroepDetail extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs="12" sm="12" md="6" lg="6">
+                    <Col xs="12" sm="12" md="3" lg="3">
+
                         <h2>{this.state.groep.naam}</h2>
                         <p><a href={'mailto:' + this.state.groep.email}>{this.state.groep.email}</a></p>
                         <p>{this.state.groep.straat} {this.state.groep.huisnr}{this.state.groep.bus}, {this.state.groep.postcode} {this.state.groep.plaats}</p>
+                        <p><a href={this.state.groep.link} target="_blank">Link</a></p>
                     </Col>
                     <Col xs="12" sm="12" md="6" lg="6">
                         <h3>Afdelingen</h3>
@@ -66,13 +69,21 @@ class GroepDetail extends React.Component {
                                 this.state.takken.map((item, key) => {
                                     return (
                                         <ListGroupItem key={key}>
-                                            <ListGroupItemHeading>{item.naam}</ListGroupItemHeading>
+                                            <ListGroupItemHeading>
+                                                {
+                                                    (localStorage.getItem('role')[1] === '1' || localStorage.getItem('role')[1] === '3') ?
+                                                        <Link to={'/profile/groep/'+this.state.groep.idgroep+'/tak/'+item.idtak}><b>{item.naam}</b></Link>
+                                                        :
+                                                        <b>{item.naam}</b>
+                                                }
+                                            </ListGroupItemHeading>
                                             <ListGroupItemText>
                                                 <p>{item.omschrijving}</p>
                                                 <p><UpdateTak idtak={item.idtak}
                                                     naam={item.naam}
                                                     omschrijving={item.omschrijving} /></p>
                                                 <p><DeleteTak idtak={item.idtak} naam={item.naam} /></p>
+                                                <p><RegisterKind idtak={item.idtak} naamtak={item.naam} /></p>
                                             </ListGroupItemText>
                                         </ListGroupItem>
                                     );
