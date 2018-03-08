@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { ListGroupItem, Modal, ModalHeader, ModalFooter, ModalBody, Button } from 'reactstrap';
+import DeleteKindFromTak from '../Takken/DeleteKindFromTak';
 
 class TakItem extends React.Component {
 
@@ -41,7 +42,7 @@ class TakItem extends React.Component {
     render() {
         return(
             <div>
-                <ListGroupItem onClick={this.toggle} style={{'cursor':'pointer'}}>{this.props.naam}</ListGroupItem>
+                <ListGroupItem onClick={this.toggle} style={{'cursor':'pointer'}}>{this.props.naam}{'   '}<DeleteKindFromTak idkind={this.props.idkind} idtak={this.props.idtak} naam={this.props.kindnaam} voornaam={this.props.voornaam} /></ListGroupItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>{this.props.naam}</ModalHeader>
                     <ModalBody>

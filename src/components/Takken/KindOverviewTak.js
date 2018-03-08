@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Breadcrumb, BreadcrumbItem, Table, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
+import DeleteKindFromTak from './DeleteKindFromTak';
 
 class KindOverviewTak extends React.Component {
 
@@ -117,6 +118,7 @@ class KindOverviewTak extends React.Component {
                                         <td>{this.boolToText(row.zwemmen)}</td>
                                         <td>{this.boolToText(row.sport)}</td>
                                         <td>{this.boolToText(row.dafi)}</td>
+                                        <td><DeleteKindFromTak /></td>
                                     </tr>
                                 )
                             })}</tbody>

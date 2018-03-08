@@ -69,6 +69,9 @@ class UpdateTak extends React.Component {
     }
 
     render() {
+        if(localStorage.getItem('role')[1] !== '1'){
+            return null;
+        }
         return(
             <div>
                 <Button onClick={this.toggle} color="warning"><i className="fa fa-edit"></i></Button>

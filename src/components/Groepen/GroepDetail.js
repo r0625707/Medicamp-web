@@ -6,6 +6,7 @@ import TakForm from '../Takken/TakForm';
 import UpdateTak from '../Takken/UpdateTak';
 import DeleteTak from '../Takken/VerwijderTak';
 import RegisterKind from '../Takken/RegisterKind';
+import AddLeiderToTak from '../Takken/AddLeiderToTak';
 
 class GroepDetail extends React.Component {
 
@@ -83,6 +84,7 @@ class GroepDetail extends React.Component {
                                                     naam={item.naam}
                                                     omschrijving={item.omschrijving} /></p>
                                                 <p><DeleteTak idtak={item.idtak} naam={item.naam} /></p>
+                                                <p><AddLeiderToTak idtak={item.idtak} naamtak={item.naam} /></p>
                                                 <p><RegisterKind idtak={item.idtak} naamtak={item.naam} /></p>
                                             </ListGroupItemText>
                                         </ListGroupItem>

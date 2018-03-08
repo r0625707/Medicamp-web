@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Popover, PopoverBody, Tooltip } from 'reactstrap';
 import axios from 'axios';
 
-class DeleteTak extends React.Component {
+class DeleteKindFromTak extends React.Component {
     constructor(props) {
         super(props);
 
@@ -35,24 +35,20 @@ class DeleteTak extends React.Component {
     }
 
     delete() {
-        axios.delete("https://medicamp-so.appspot.com/api/tak/" + this.props.idtak, this.headers)
-            .then(this.toggle);
+        axios.delete("https://medicamp-so.appspot.com/api/tak/" + this.props.idtak+"/kind/"+this.props.idkind, this.headers)
+        .then(this.toggle);
     }
 
     render() {
-        
-        if(localStorage.getItem('role')[1] !== '1'){
-            return null;
-        }
-        return (
+        return(
             <div>
-                <Button color="danger" onClick={this.toggle} id={'Popover' + this.props.idtak} style={{ cursor: 'pointer' }}><i className="fa fa-trash"></i></Button>
-                <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'Popover' + this.props.idtak} toggle={this.tooltipToggle}>
-                    verwijderen
+                <Button color="danger" onClick={this.toggle} id={'Popovertak' + this.props.idtak} style={{cursor:'pointer'}}><i className="fa fa-unlink"></i></Button>
+                <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={'Popovertak' + this.props.idtak} toggle={this.tooltipToggle}>
+                    uitschrijven
                 </Tooltip>
-                <Popover placement="top" isOpen={this.state.popoverOpen} target={'Popover' + this.props.idtak} toggle={this.toggle}>
+                <Popover placement="top" isOpen={this.state.popoverOpen} target={'Popovertak' + this.props.idtak} toggle={this.toggle}>
                     <PopoverBody>
-                        {this.props.naam} verwijderen? <br />
+                        {this.props.voornaam} {this.props.naam} uitschrijven? <br />
                         <Button color="success" onClick={this.delete}>Ja</Button>{' '}
                         <Button onClick={this.toggle}>Nee</Button>
                     </PopoverBody>
@@ -62,4 +58,4 @@ class DeleteTak extends React.Component {
     }
 }
 
-export default DeleteTak;
+export default DeleteKindFromTak;

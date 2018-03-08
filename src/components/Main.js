@@ -20,15 +20,18 @@ import ContactOverviewTak from './Takken/ContactOverviewTak';
 import DieetOverviewTak from './Takken/DieetOverviewTak';
 import MedicatieOverviewTak from './Medicatie/MedicatieOverviewTak';
 import ZiekteOverviewTak from './Ziekte/ZiekteOverviewTak';
+import LandingPage from './LandingPage';
+import GroepList from './Groepen/GroepList';
 
 class Main extends React.Component {
     render() {
         return(
             <main>
                 <Switch>
-                    <Route exact path='/' component={TestComponent} />
+                    <Route exact path='/' component={LandingPage} />
                     <Route exact path='/about' component={About} />
                     <Route exact path='/contact' component={Contact} />
+                    <Route exact path='/groep' component={GroepList} />
                     <Route exact path='/admin' component={Admin} />
                     <Route exact path='/profile' component={Profile} />
                     <Route exact path='/profile/voogd' component={VoogdOverviewUser} />

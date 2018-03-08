@@ -160,7 +160,7 @@ class KindDetail extends React.Component {
                             {
                                 this.state.takken.map((item, key) => {
                                     return(
-                                        <TakItem key={key} idtak={item.idtak} naam={item.naam} omschrijving={item.omschrijving} />
+                                        <TakItem key={key} idtak={item.idtak} naam={item.naam} omschrijving={item.omschrijving} idkind={this.state.kind.idkind} kindnaam={this.state.kind.naam} voornaam={this.state.kind.voornaam} />
                                     );
                                 })
                             }

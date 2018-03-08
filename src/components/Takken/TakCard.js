@@ -59,7 +59,6 @@ class TakCard extends React.Component {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <Button color="success">+</Button>
                     </CardFooter>
                 </Card>
             </Col>

@@ -74,6 +74,9 @@ class Header extends React.Component {
                             <NavItem>
                                 <NavLink tag={Link} to="/contact">Contact</NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} to="/groep">Groepen</NavLink>
+                            </NavItem>
                             {this.authItems()}
                         </Nav>
                     </Collapse>
