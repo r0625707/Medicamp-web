@@ -151,10 +151,10 @@ class KindDetailTak extends React.Component {
                 </Row>
                 <hr />
                 <Row>
-                    <VoogdCard id={this.props.match.params.idkind} login={localStorage.getItem('login')} for="kind" tak={true} role={this.state.user.role} />
-                    <MedicatieCard idkind={this.props.match.params.idkind} tak={true} />
-                    <ZiekteCard idkind={this.props.match.params.idkind} tak={true} />
-                    <DieetCard idkind={this.props.match.params.idkind} tak={true} />
+                    <VoogdCard id={this.props.match.params.idkind} idkind={this.props.match.params.idkind} idgroep={this.props.match.params.idgroep} idtak={this.props.match.params.idtak} login={localStorage.getItem('login')} for="kind" tak={true} role={this.state.user.role} />
+                    <MedicatieCard idkind={this.props.match.params.idkind} idgroep={this.props.match.params.idgroep} idtak={this.props.match.params.idtak} tak={true} />
+                    <ZiekteCard idkind={this.props.match.params.idkind} idgroep={this.props.match.params.idgroep} idtak={this.props.match.params.idtak} tak={true} />
+                    <DieetCard idkind={this.props.match.params.idkind} idgroep={this.props.match.params.idgroep} idtak={this.props.match.params.idtak} tak={true} />
                 </Row>
             </div>
         );

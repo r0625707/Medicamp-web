@@ -31,9 +31,15 @@ class VoogdCard extends React.Component {
         switch (this.props.for) {
             case "kind":
                 link = "https://medicamp-so.appspot.com/api/kind/" + this.props.id + "/voogd";
-                this.setState({
-                    route: "/profile/kind/"+this.props.id+"/voogd"
-                });
+                if (this.props.tak) {
+                    this.setState({
+                        route: "/profile/groep/" + this.props.idgroep + "/tak/" + this.props.idtak + "/kind/" + this.props.idkind + "/voogd"
+                    });
+                } else {
+                    this.setState({
+                        route: "/profile/kind/" + this.props.id + "/voogd"
+                    });
+                }
                 break
             case "user":
                 link = "https://medicamp-so.appspot.com/api/user/" + localStorage.getItem('login') + "/voogd";
@@ -85,7 +91,7 @@ class VoogdCard extends React.Component {
                                             plaats={row.plaats}
                                             tak={this.props.tak} />
                                         </td>
-                                        <td><DeleteVoogd for={this.props.for} idvoogd={row.idvoogd} naam={row.naam} voornaam={row.voornaam} idkind={this.props.id} tak={this.props.tak}/></td>
+                                        <td><DeleteVoogd for={this.props.for} idvoogd={row.idvoogd} naam={row.naam} voornaam={row.voornaam} idkind={this.props.id} tak={this.props.tak} /></td>
                                     </tr>
                                 )
                             })}

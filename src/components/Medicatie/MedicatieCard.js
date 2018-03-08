@@ -44,7 +44,14 @@ class MedicatieCard extends React.Component {
             <Col xs="12" sm="12" md="6" lg="3">
                 <Card>
                     <CardHeader>
-                        <Link to={'/profile/kind/'+this.props.idkind+'/medicatie'}><b>Medicatie</b></Link>
+                    {
+                            !this.props.tak &&
+                            <Link to={'/profile/kind/'+this.props.idkind+'/medicatie'}><b>Medicatie</b></Link>
+                        }
+                        {
+                            this.props.tak &&
+                            <Link to={'/profile/groep/'+this.props.idgroep+'/tak/'+this.props.idtak+'/kind/'+this.props.idkind+'/medicatie'}><b>Medicatie</b></Link>
+                        }
                     </CardHeader>
                     <CardBody>
                         <Table responsive hover>
